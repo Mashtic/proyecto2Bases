@@ -4,23 +4,19 @@
  */
 package com.mycompany.proyecto2bases_sistemademarcascorp_fabianianjoselynjeison;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import javax.swing.ButtonGroup;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JPanel;
 
 
-/**
- *
- * @author vmrjo
- */
 public class vistaPlanta extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VistaPlanta
-     */
     public vistaPlanta() {
         initComponents();
-        grupoBotones ();
-        opcionNull();
+        agrupaciones();
     }
 
     /**
@@ -37,18 +33,89 @@ public class vistaPlanta extends javax.swing.JFrame {
         tBtnEmpleados = new javax.swing.JToggleButton();
         tBtnAsistencia = new javax.swing.JToggleButton();
         tBtnCalendario = new javax.swing.JToggleButton();
-        tBtnPlanillas = new javax.swing.JToggleButton();
+        tBtnCalculoPlanilla = new javax.swing.JToggleButton();
         tBtnConfiguracion = new javax.swing.JToggleButton();
+        tBtnPlanillas = new javax.swing.JToggleButton();
         pnlEncabezado = new javax.swing.JPanel();
         lblNombrePlanta = new javax.swing.JLabel();
         checkModoPrueba = new javax.swing.JCheckBox();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblVista = new javax.swing.JTable();
+        pnlPrincipal = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        pnlEmpleados = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
+        scrollPrincipal = new javax.swing.JScrollPane();
+        txaPrincipal = new javax.swing.JTextArea();
+        btnConsultarEmpleados = new javax.swing.JButton();
         lblFiltros = new javax.swing.JLabel();
-        comboBoxSupervisores = new javax.swing.JComboBox<>();
+        lblEmpleado = new javax.swing.JLabel();
         lblSupervisor = new javax.swing.JLabel();
+        txfIdFiltro = new javax.swing.JTextField();
+        comboSupervisor = new javax.swing.JComboBox<>();
+        lblDepartamento = new javax.swing.JLabel();
         lblDadosDeBaja = new javax.swing.JLabel();
+        comboDepartamento = new javax.swing.JComboBox<>();
+        txfBajasDesde = new javax.swing.JTextField();
+        txfBajasHasta = new javax.swing.JTextField();
+        btnConsultar = new javax.swing.JButton();
+        lblModificacionEmpleados = new javax.swing.JLabel();
+        txfId = new javax.swing.JTextField();
+        txfNombre = new javax.swing.JTextField();
+        txfDepartamento = new javax.swing.JTextField();
+        txfApellidos = new javax.swing.JTextField();
+        txfSupervisor = new javax.swing.JTextField();
+        txfCalendario = new javax.swing.JTextField();
+        txfFechaEntrada = new javax.swing.JTextField();
+        txfFechaSalida = new javax.swing.JTextField();
+        btnInsertarEmpleado = new javax.swing.JButton();
+        btnModificarEmpleado = new javax.swing.JButton();
+        lblEmpleadoBaja = new javax.swing.JLabel();
+        txfIdEliminar = new javax.swing.JTextField();
+        txfFechaBaja = new javax.swing.JTextField();
+        btnEliminarEmpleado = new javax.swing.JButton();
+        pnlCalendario = new javax.swing.JPanel();
+        lblCalendario = new javax.swing.JLabel();
+        lblJornadaLaboral = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txaJornada = new javax.swing.JTextArea();
+        lblFeriados = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txaFeriados = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txaCalendario = new javax.swing.JTextArea();
+        pnlAsistencia = new javax.swing.JPanel();
+        lblAsistencia = new javax.swing.JLabel();
+        scrollPrincipal1 = new javax.swing.JScrollPane();
+        txaAsistencia = new javax.swing.JTextArea();
+        btnConsultarAsistencia = new javax.swing.JButton();
+        lblFiltrosAsistencia = new javax.swing.JLabel();
+        lblAusencias = new javax.swing.JLabel();
+        txfAusenciasDesde = new javax.swing.JTextField();
+        txfAusenciasHasta = new javax.swing.JTextField();
+        btnConsultarAusencias = new javax.swing.JButton();
+        lblTardias = new javax.swing.JLabel();
+        txfTardiasDesde = new javax.swing.JTextField();
+        txfTardiasHasta = new javax.swing.JTextField();
+        lblEmpleadosSinMarcaSalida = new javax.swing.JLabel();
+        txfEmpleadosSinMarcaDesde = new javax.swing.JTextField();
+        txfEmpleadosSinMarcaHasta = new javax.swing.JTextField();
+        btnConsultarTardias = new javax.swing.JButton();
+        btnConsultarEmpleadosSinMarca = new javax.swing.JButton();
+        pnlCalculoPlanilla = new javax.swing.JPanel();
+        lblCalculoPlanillas = new javax.swing.JLabel();
+        lblCalendarioSeleccionado = new javax.swing.JLabel();
+        comboCalendarios = new javax.swing.JComboBox<>();
+        lblSalarios = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txaSalarios = new javax.swing.JTextArea();
+        tbtnAprobarPlanilla = new javax.swing.JToggleButton();
+        tbtnRechazarPlanilla = new javax.swing.JToggleButton();
+        btnEnviarPlanilla = new javax.swing.JButton();
+        btnCalcularPlanilla = new javax.swing.JButton();
+        pnlPlanillas = new javax.swing.JPanel();
+        lblPlanillas = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txaPlanillasPlanta = new javax.swing.JTextArea();
+        btnConsultarPlanillas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,7 +124,7 @@ public class vistaPlanta extends javax.swing.JFrame {
         pnlMenu.setBackground(new java.awt.Color(0, 51, 102));
 
         tBtnEmpleados.setBackground(new java.awt.Color(0, 51, 102));
-        tBtnEmpleados.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
+        tBtnEmpleados.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         tBtnEmpleados.setForeground(new java.awt.Color(255, 255, 255));
         tBtnEmpleados.setText("Empleados");
         tBtnEmpleados.addActionListener(new java.awt.event.ActionListener() {
@@ -67,12 +134,17 @@ public class vistaPlanta extends javax.swing.JFrame {
         });
 
         tBtnAsistencia.setBackground(new java.awt.Color(0, 51, 102));
-        tBtnAsistencia.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
+        tBtnAsistencia.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         tBtnAsistencia.setForeground(new java.awt.Color(255, 255, 255));
         tBtnAsistencia.setText("Asistencia");
+        tBtnAsistencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tBtnAsistenciaActionPerformed(evt);
+            }
+        });
 
         tBtnCalendario.setBackground(new java.awt.Color(0, 51, 102));
-        tBtnCalendario.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
+        tBtnCalendario.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         tBtnCalendario.setForeground(new java.awt.Color(255, 255, 255));
         tBtnCalendario.setText("Calendario Laboral");
         tBtnCalendario.addActionListener(new java.awt.event.ActionListener() {
@@ -81,15 +153,30 @@ public class vistaPlanta extends javax.swing.JFrame {
             }
         });
 
-        tBtnPlanillas.setBackground(new java.awt.Color(0, 51, 102));
-        tBtnPlanillas.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
-        tBtnPlanillas.setForeground(new java.awt.Color(255, 255, 255));
-        tBtnPlanillas.setText("Planillas");
+        tBtnCalculoPlanilla.setBackground(new java.awt.Color(0, 51, 102));
+        tBtnCalculoPlanilla.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        tBtnCalculoPlanilla.setForeground(new java.awt.Color(255, 255, 255));
+        tBtnCalculoPlanilla.setText("Cálculo de Planilla");
+        tBtnCalculoPlanilla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tBtnCalculoPlanillaActionPerformed(evt);
+            }
+        });
 
         tBtnConfiguracion.setBackground(new java.awt.Color(0, 51, 102));
-        tBtnConfiguracion.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
+        tBtnConfiguracion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         tBtnConfiguracion.setForeground(new java.awt.Color(255, 255, 255));
         tBtnConfiguracion.setText("Configuración");
+
+        tBtnPlanillas.setBackground(new java.awt.Color(0, 51, 102));
+        tBtnPlanillas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        tBtnPlanillas.setForeground(new java.awt.Color(255, 255, 255));
+        tBtnPlanillas.setText("Planillas");
+        tBtnPlanillas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tBtnPlanillasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlMenuLayout = new javax.swing.GroupLayout(pnlMenu);
         pnlMenu.setLayout(pnlMenuLayout);
@@ -101,8 +188,9 @@ public class vistaPlanta extends javax.swing.JFrame {
                     .addComponent(tBtnEmpleados, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tBtnAsistencia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tBtnCalendario, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                    .addComponent(tBtnPlanillas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tBtnConfiguracion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(tBtnCalculoPlanilla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tBtnConfiguracion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tBtnPlanillas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         pnlMenuLayout.setVerticalGroup(
@@ -115,19 +203,21 @@ public class vistaPlanta extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(tBtnAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(tBtnCalculoPlanilla, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(tBtnPlanillas, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 335, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(tBtnConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
 
         pnlEncabezado.setBackground(new java.awt.Color(0, 0, 0));
 
-        lblNombrePlanta.setFont(new java.awt.Font("Segoe UI", 1, 25)); // NOI18N
+        lblNombrePlanta.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         lblNombrePlanta.setForeground(new java.awt.Color(255, 255, 255));
         lblNombrePlanta.setText("Nombre de Planta");
 
-        checkModoPrueba.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        checkModoPrueba.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         checkModoPrueba.setForeground(new java.awt.Color(255, 255, 255));
         checkModoPrueba.setText("Modo Prueba");
 
@@ -138,93 +228,679 @@ public class vistaPlanta extends javax.swing.JFrame {
             .addGroup(pnlEncabezadoLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(lblNombrePlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 1035, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(checkModoPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addGap(28, 28, 28))
         );
         pnlEncabezadoLayout.setVerticalGroup(
             pnlEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEncabezadoLayout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
-                .addGroup(pnlEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNombrePlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkModoPrueba))
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addGroup(pnlEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkModoPrueba)
+                    .addComponent(lblNombrePlanta))
                 .addGap(24, 24, 24))
         );
 
-        checkModoPrueba.getAccessibleContext().setAccessibleName("Modo Prueba");
         checkModoPrueba.getAccessibleContext().setAccessibleDescription("");
 
-        tblVista.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tblVista.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        pnlPrincipal.setBackground(javax.swing.UIManager.getDefaults().getColor("Desktop.background"));
+        pnlPrincipal.setLayout(new java.awt.CardLayout());
 
-            },
-            new String [] {
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
-            }
-        ));
-        tblVista.setColumnSelectionAllowed(true);
-        jScrollPane1.setViewportView(tblVista);
-        tblVista.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        pnlPrincipal.add(jPanel1, "card2");
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(51, 51, 51));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Lista de Empleados");
+        lblTitulo.setText("Lista de empleados");
 
-        lblFiltros.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        lblFiltros.setText("Filtros");
+        txaPrincipal.setColumns(20);
+        txaPrincipal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txaPrincipal.setRows(5);
+        txaPrincipal.setPreferredSize(new java.awt.Dimension(938, 298));
+        scrollPrincipal.setViewportView(txaPrincipal);
 
-        comboBoxSupervisores.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        btnConsultarEmpleados.setBackground(new java.awt.Color(0, 51, 153));
+        btnConsultarEmpleados.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btnConsultarEmpleados.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultarEmpleados.setText("Consultar empleados");
 
-        lblSupervisor.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        lblFiltros.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        lblFiltros.setText("Filtros de consulta:");
+
+        lblEmpleado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblEmpleado.setText("Empleado:");
+
+        lblSupervisor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblSupervisor.setText("Supervisor:");
 
-        lblDadosDeBaja.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        txfIdFiltro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfIdFiltro.setForeground(java.awt.Color.gray);
+        txfIdFiltro.setText("Id");
+
+        comboSupervisor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        lblDepartamento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblDepartamento.setText("Departamento:");
+
+        lblDadosDeBaja.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblDadosDeBaja.setText("Dados de baja:");
+
+        comboDepartamento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        txfBajasDesde.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfBajasDesde.setForeground(java.awt.Color.gray);
+        txfBajasDesde.setText("Desde (yyyy-mm-dd)");
+        txfBajasDesde.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfBajasDesdeActionPerformed(evt);
+            }
+        });
+
+        txfBajasHasta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfBajasHasta.setForeground(java.awt.Color.gray);
+        txfBajasHasta.setText("Hasta (yyyy-mm-dd)");
+
+        btnConsultar.setBackground(new java.awt.Color(0, 51, 153));
+        btnConsultar.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btnConsultar.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
+
+        lblModificacionEmpleados.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        lblModificacionEmpleados.setText("Modificación de lista de empleados:");
+
+        txfId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfId.setForeground(java.awt.Color.gray);
+        txfId.setText("Id");
+
+        txfNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfNombre.setForeground(java.awt.Color.gray);
+        txfNombre.setText("Nombre");
+
+        txfDepartamento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfDepartamento.setForeground(java.awt.Color.gray);
+        txfDepartamento.setText("Departamento");
+
+        txfApellidos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfApellidos.setForeground(java.awt.Color.gray);
+        txfApellidos.setText("Apellidos");
+
+        txfSupervisor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfSupervisor.setForeground(java.awt.Color.gray);
+        txfSupervisor.setText("Supervisor");
+
+        txfCalendario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfCalendario.setForeground(java.awt.Color.gray);
+        txfCalendario.setText("Calendario");
+
+        txfFechaEntrada.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfFechaEntrada.setForeground(java.awt.Color.gray);
+        txfFechaEntrada.setText("Fecha de entrada (yyyy-mm-dd)");
+
+        txfFechaSalida.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfFechaSalida.setForeground(java.awt.Color.gray);
+        txfFechaSalida.setText("Fecha de salida (yyyy-mm-dd)");
+
+        btnInsertarEmpleado.setBackground(new java.awt.Color(0, 51, 153));
+        btnInsertarEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btnInsertarEmpleado.setForeground(new java.awt.Color(255, 255, 255));
+        btnInsertarEmpleado.setText("Insertar");
+
+        btnModificarEmpleado.setBackground(new java.awt.Color(0, 51, 153));
+        btnModificarEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btnModificarEmpleado.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificarEmpleado.setText("Modificar");
+
+        lblEmpleadoBaja.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        lblEmpleadoBaja.setText("Ingrese el id del empleado que quiere dar de baja:");
+
+        txfIdEliminar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfIdEliminar.setForeground(java.awt.Color.gray);
+        txfIdEliminar.setText("Id");
+
+        txfFechaBaja.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfFechaBaja.setForeground(java.awt.Color.gray);
+        txfFechaBaja.setText("Fecha de salida (yyyy-mm-dd)");
+
+        btnEliminarEmpleado.setBackground(new java.awt.Color(0, 51, 153));
+        btnEliminarEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btnEliminarEmpleado.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminarEmpleado.setText("Dar de baja");
+
+        javax.swing.GroupLayout pnlEmpleadosLayout = new javax.swing.GroupLayout(pnlEmpleados);
+        pnlEmpleados.setLayout(pnlEmpleadosLayout);
+        pnlEmpleadosLayout.setHorizontalGroup(
+            pnlEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEmpleadosLayout.createSequentialGroup()
+                .addGap(328, 328, 328)
+                .addComponent(btnConsultarEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEmpleadosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlEmpleadosLayout.createSequentialGroup()
+                        .addGroup(pnlEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlEmpleadosLayout.createSequentialGroup()
+                                .addComponent(lblEmpleadoBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(txfIdEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txfFechaBaja))
+                            .addGroup(pnlEmpleadosLayout.createSequentialGroup()
+                                .addGroup(pnlEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblModificacionEmpleados)
+                                    .addGroup(pnlEmpleadosLayout.createSequentialGroup()
+                                        .addComponent(txfId, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(pnlEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txfNombre)
+                                            .addComponent(txfDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(5, 5, 5)
+                                        .addGroup(pnlEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(pnlEmpleadosLayout.createSequentialGroup()
+                                                .addComponent(txfSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txfCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(txfApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(pnlEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txfFechaSalida)
+                                            .addComponent(txfFechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 6, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addGroup(pnlEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnModificarEmpleado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminarEmpleado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnInsertarEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlEmpleadosLayout.createSequentialGroup()
+                        .addGroup(pnlEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEmpleadosLayout.createSequentialGroup()
+                                .addComponent(lblSupervisor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(pnlEmpleadosLayout.createSequentialGroup()
+                                .addComponent(lblEmpleado)
+                                .addGap(16, 16, 16)))
+                        .addGroup(pnlEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txfIdFiltro)
+                            .addComponent(comboSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEmpleadosLayout.createSequentialGroup()
+                                .addComponent(lblDadosDeBaja)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEmpleadosLayout.createSequentialGroup()
+                                .addComponent(lblDepartamento)
+                                .addGap(5, 5, 5)))
+                        .addGroup(pnlEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(comboDepartamento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txfBajasDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txfBajasHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlEmpleadosLayout.createSequentialGroup()
+                        .addComponent(lblFiltros)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addComponent(scrollPrincipal)
+        );
+        pnlEmpleadosLayout.setVerticalGroup(
+            pnlEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEmpleadosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scrollPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(btnConsultarEmpleados)
+                .addGap(30, 30, 30)
+                .addComponent(lblFiltros)
+                .addGap(2, 2, 2)
+                .addGroup(pnlEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmpleado)
+                    .addComponent(txfIdFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDepartamento)
+                    .addComponent(comboDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConsultar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSupervisor)
+                    .addComponent(comboSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfBajasHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfBajasDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDadosDeBaja))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addComponent(lblModificacionEmpleados)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfFechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnInsertarEmpleado))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txfFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificarEmpleado))
+                .addGap(31, 31, 31)
+                .addGroup(pnlEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txfIdEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarEmpleado)
+                    .addComponent(lblEmpleadoBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfFechaBaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49))
+        );
+
+        pnlPrincipal.add(pnlEmpleados, "card4");
+
+        lblCalendario.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lblCalendario.setForeground(new java.awt.Color(51, 51, 51));
+        lblCalendario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCalendario.setText("Calendario");
+
+        lblJornadaLaboral.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lblJornadaLaboral.setForeground(new java.awt.Color(51, 51, 51));
+        lblJornadaLaboral.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblJornadaLaboral.setText("Jornada Laboral");
+
+        txaJornada.setColumns(20);
+        txaJornada.setRows(5);
+        jScrollPane2.setViewportView(txaJornada);
+
+        lblFeriados.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lblFeriados.setForeground(new java.awt.Color(51, 51, 51));
+        lblFeriados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblFeriados.setText("Lista de feriados");
+
+        txaFeriados.setColumns(20);
+        txaFeriados.setRows(5);
+        jScrollPane3.setViewportView(txaFeriados);
+
+        txaCalendario.setColumns(20);
+        txaCalendario.setRows(5);
+        jScrollPane4.setViewportView(txaCalendario);
+
+        javax.swing.GroupLayout pnlCalendarioLayout = new javax.swing.GroupLayout(pnlCalendario);
+        pnlCalendario.setLayout(pnlCalendarioLayout);
+        pnlCalendarioLayout.setHorizontalGroup(
+            pnlCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblCalendario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnlCalendarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblJornadaLaboral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(jScrollPane2)
+            .addComponent(lblFeriados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane3)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
+        );
+        pnlCalendarioLayout.setVerticalGroup(
+            pnlCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCalendarioLayout.createSequentialGroup()
+                .addComponent(lblCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(lblJornadaLaboral, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(lblFeriados, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
+        );
+
+        pnlPrincipal.add(pnlCalendario, "card6");
+
+        lblAsistencia.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lblAsistencia.setForeground(new java.awt.Color(51, 51, 51));
+        lblAsistencia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAsistencia.setText("Asistencia de empleados");
+
+        txaAsistencia.setColumns(20);
+        txaAsistencia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txaAsistencia.setRows(5);
+        txaAsistencia.setPreferredSize(new java.awt.Dimension(938, 298));
+        scrollPrincipal1.setViewportView(txaAsistencia);
+
+        btnConsultarAsistencia.setBackground(new java.awt.Color(0, 51, 153));
+        btnConsultarAsistencia.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btnConsultarAsistencia.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultarAsistencia.setText("Consultar asistencia");
+
+        lblFiltrosAsistencia.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        lblFiltrosAsistencia.setText("Filtros de consulta:");
+
+        lblAusencias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblAusencias.setText("Ausencias:");
+
+        txfAusenciasDesde.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfAusenciasDesde.setForeground(java.awt.Color.gray);
+        txfAusenciasDesde.setText("Desde (yyyy-mm-dd)");
+        txfAusenciasDesde.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfAusenciasDesdeActionPerformed(evt);
+            }
+        });
+
+        txfAusenciasHasta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfAusenciasHasta.setForeground(java.awt.Color.gray);
+        txfAusenciasHasta.setText("Hasta (yyyy-mm-dd)");
+
+        btnConsultarAusencias.setBackground(new java.awt.Color(0, 51, 153));
+        btnConsultarAusencias.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btnConsultarAusencias.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultarAusencias.setText("Consultar ausencias");
+        btnConsultarAusencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarAusenciasActionPerformed(evt);
+            }
+        });
+
+        lblTardias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblTardias.setText("Tardías:");
+
+        txfTardiasDesde.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfTardiasDesde.setForeground(java.awt.Color.gray);
+        txfTardiasDesde.setText("Desde (yyyy-mm-dd)");
+        txfTardiasDesde.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfTardiasDesdeActionPerformed(evt);
+            }
+        });
+
+        txfTardiasHasta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfTardiasHasta.setForeground(java.awt.Color.gray);
+        txfTardiasHasta.setText("Hasta (yyyy-mm-dd)");
+
+        lblEmpleadosSinMarcaSalida.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblEmpleadosSinMarcaSalida.setText("Empleados sin marca de salida");
+
+        txfEmpleadosSinMarcaDesde.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfEmpleadosSinMarcaDesde.setForeground(java.awt.Color.gray);
+        txfEmpleadosSinMarcaDesde.setText("Desde (yyyy-mm-dd)");
+        txfEmpleadosSinMarcaDesde.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfEmpleadosSinMarcaDesdeActionPerformed(evt);
+            }
+        });
+
+        txfEmpleadosSinMarcaHasta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfEmpleadosSinMarcaHasta.setForeground(java.awt.Color.gray);
+        txfEmpleadosSinMarcaHasta.setText("Hasta (yyyy-mm-dd)");
+
+        btnConsultarTardias.setBackground(new java.awt.Color(0, 51, 153));
+        btnConsultarTardias.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btnConsultarTardias.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultarTardias.setText("Consultar tardías");
+        btnConsultarTardias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarTardiasActionPerformed(evt);
+            }
+        });
+
+        btnConsultarEmpleadosSinMarca.setBackground(new java.awt.Color(0, 51, 153));
+        btnConsultarEmpleadosSinMarca.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btnConsultarEmpleadosSinMarca.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultarEmpleadosSinMarca.setText("Consultar");
+        btnConsultarEmpleadosSinMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarEmpleadosSinMarcaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlAsistenciaLayout = new javax.swing.GroupLayout(pnlAsistencia);
+        pnlAsistencia.setLayout(pnlAsistenciaLayout);
+        pnlAsistenciaLayout.setHorizontalGroup(
+            pnlAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(scrollPrincipal1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(pnlAsistenciaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAsistencia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
+                    .addGroup(pnlAsistenciaLayout.createSequentialGroup()
+                        .addGroup(pnlAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlAsistenciaLayout.createSequentialGroup()
+                                .addGap(138, 138, 138)
+                                .addGroup(pnlAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(pnlAsistenciaLayout.createSequentialGroup()
+                                        .addGroup(pnlAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(pnlAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(pnlAsistenciaLayout.createSequentialGroup()
+                                                    .addComponent(txfTardiasDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(txfTardiasHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(pnlAsistenciaLayout.createSequentialGroup()
+                                                    .addComponent(lblAusencias)
+                                                    .addGap(16, 16, 16)
+                                                    .addComponent(txfAusenciasDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(txfAusenciasHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(lblTardias))
+                                        .addGap(33, 33, 33)
+                                        .addGroup(pnlAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnConsultarAusencias, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnConsultarTardias, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(pnlAsistenciaLayout.createSequentialGroup()
+                                        .addComponent(lblEmpleadosSinMarcaSalida)
+                                        .addGap(16, 16, 16)
+                                        .addComponent(txfEmpleadosSinMarcaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txfEmpleadosSinMarcaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnConsultarEmpleadosSinMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lblFiltrosAsistencia))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(pnlAsistenciaLayout.createSequentialGroup()
+                .addGap(339, 339, 339)
+                .addComponent(btnConsultarAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlAsistenciaLayout.setVerticalGroup(
+            pnlAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAsistenciaLayout.createSequentialGroup()
+                .addComponent(lblAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scrollPrincipal1, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(btnConsultarAsistencia)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(lblFiltrosAsistencia)
+                .addGap(10, 10, 10)
+                .addGroup(pnlAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAusencias)
+                    .addComponent(txfAusenciasHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfAusenciasDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConsultarAusencias))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTardias)
+                    .addComponent(txfTardiasHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfTardiasDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConsultarTardias))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmpleadosSinMarcaSalida)
+                    .addComponent(txfEmpleadosSinMarcaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfEmpleadosSinMarcaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConsultarEmpleadosSinMarca))
+                .addGap(48, 48, 48))
+        );
+
+        pnlPrincipal.add(pnlAsistencia, "card5");
+
+        lblCalculoPlanillas.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lblCalculoPlanillas.setForeground(new java.awt.Color(51, 51, 51));
+        lblCalculoPlanillas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCalculoPlanillas.setText("Cálculo de Planillas");
+
+        lblCalendarioSeleccionado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblCalendarioSeleccionado.setText("Seleccione el calendario que se va a pagar:");
+
+        comboCalendarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        lblSalarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblSalarios.setText("Salarios:");
+
+        txaSalarios.setColumns(20);
+        txaSalarios.setRows(5);
+        jScrollPane1.setViewportView(txaSalarios);
+
+        tbtnAprobarPlanilla.setBackground(new java.awt.Color(51, 153, 0));
+        tbtnAprobarPlanilla.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        tbtnAprobarPlanilla.setForeground(new java.awt.Color(255, 255, 255));
+        tbtnAprobarPlanilla.setText("Aprobar");
+
+        tbtnRechazarPlanilla.setBackground(new java.awt.Color(204, 0, 51));
+        tbtnRechazarPlanilla.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        tbtnRechazarPlanilla.setForeground(new java.awt.Color(255, 255, 255));
+        tbtnRechazarPlanilla.setText("Rechazar");
+
+        btnEnviarPlanilla.setBackground(new java.awt.Color(0, 51, 153));
+        btnEnviarPlanilla.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnEnviarPlanilla.setForeground(new java.awt.Color(255, 255, 255));
+        btnEnviarPlanilla.setText("Enviar planilla a coorporación");
+
+        btnCalcularPlanilla.setBackground(new java.awt.Color(0, 51, 153));
+        btnCalcularPlanilla.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btnCalcularPlanilla.setForeground(new java.awt.Color(255, 255, 255));
+        btnCalcularPlanilla.setText("Calcular Planilla");
+
+        javax.swing.GroupLayout pnlCalculoPlanillaLayout = new javax.swing.GroupLayout(pnlCalculoPlanilla);
+        pnlCalculoPlanilla.setLayout(pnlCalculoPlanillaLayout);
+        pnlCalculoPlanillaLayout.setHorizontalGroup(
+            pnlCalculoPlanillaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCalculoPlanillaLayout.createSequentialGroup()
+                .addComponent(lblSalarios)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
+            .addGroup(pnlCalculoPlanillaLayout.createSequentialGroup()
+                .addGap(244, 244, 244)
+                .addGroup(pnlCalculoPlanillaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEnviarPlanilla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlCalculoPlanillaLayout.createSequentialGroup()
+                        .addComponent(tbtnAprobarPlanilla, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(tbtnRechazarPlanilla, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlCalculoPlanillaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblCalculoPlanillas, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(pnlCalculoPlanillaLayout.createSequentialGroup()
+                .addComponent(lblCalendarioSeleccionado)
+                .addGap(18, 18, 18)
+                .addComponent(comboCalendarios, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCalcularPlanilla, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69))
+        );
+        pnlCalculoPlanillaLayout.setVerticalGroup(
+            pnlCalculoPlanillaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCalculoPlanillaLayout.createSequentialGroup()
+                .addComponent(lblCalculoPlanillas, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlCalculoPlanillaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCalendarioSeleccionado)
+                    .addComponent(comboCalendarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCalcularPlanilla))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblSalarios)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlCalculoPlanillaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tbtnAprobarPlanilla)
+                    .addComponent(tbtnRechazarPlanilla))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(btnEnviarPlanilla, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
+        );
+
+        pnlPrincipal.add(pnlCalculoPlanilla, "card3");
+
+        lblPlanillas.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lblPlanillas.setForeground(new java.awt.Color(51, 51, 51));
+        lblPlanillas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPlanillas.setText("Planillas de planta");
+
+        txaPlanillasPlanta.setColumns(20);
+        txaPlanillasPlanta.setRows(5);
+        jScrollPane5.setViewportView(txaPlanillasPlanta);
+
+        btnConsultarPlanillas.setBackground(new java.awt.Color(0, 51, 153));
+        btnConsultarPlanillas.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btnConsultarPlanillas.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultarPlanillas.setText("Consultar planillas");
+
+        javax.swing.GroupLayout pnlPlanillasLayout = new javax.swing.GroupLayout(pnlPlanillas);
+        pnlPlanillas.setLayout(pnlPlanillasLayout);
+        pnlPlanillasLayout.setHorizontalGroup(
+            pnlPlanillasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPlanillasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblPlanillas, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(jScrollPane5)
+            .addGroup(pnlPlanillasLayout.createSequentialGroup()
+                .addGap(328, 328, 328)
+                .addComponent(btnConsultarPlanillas, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlPlanillasLayout.setVerticalGroup(
+            pnlPlanillasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPlanillasLayout.createSequentialGroup()
+                .addComponent(lblPlanillas, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnConsultarPlanillas)
+                .addGap(0, 22, Short.MAX_VALUE))
+        );
+
+        pnlPrincipal.add(pnlPlanillas, "card3");
 
         javax.swing.GroupLayout pnlFondoLayout = new javax.swing.GroupLayout(pnlFondo);
         pnlFondo.setLayout(pnlFondoLayout);
         pnlFondoLayout.setHorizontalGroup(
             pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlFondoLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFondoLayout.createSequentialGroup()
                 .addComponent(pnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
-                        .addComponent(lblFiltros)
-                        .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlFondoLayout.createSequentialGroup()
-                        .addComponent(lblSupervisor)
-                        .addGap(18, 18, 18)
-                        .addComponent(comboBoxSupervisores, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblDadosDeBaja))
+                .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
             .addComponent(pnlEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlFondoLayout.setVerticalGroup(
             pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFondoLayout.createSequentialGroup()
-                .addComponent(pnlEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnlFondoLayout.createSequentialGroup()
+                .addComponent(pnlEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlFondoLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblFiltros)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblSupervisor)
-                            .addComponent(comboBoxSupervisores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblDadosDeBaja))
-                    .addGroup(pnlFondoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(pnlMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -235,106 +911,399 @@ public class vistaPlanta extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnlFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tBtnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tBtnEmpleadosActionPerformed
-        if (tBtnEmpleados.isSelected()){
-            opcionEmpleados();
-        }        
+        if (tBtnEmpleados.isSelected())
+            opcionEmpleados();    
     }//GEN-LAST:event_tBtnEmpleadosActionPerformed
 
     private void tBtnCalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tBtnCalendarioActionPerformed
-        if (tBtnCalendario.isSelected()){
+        if (tBtnCalendario.isSelected())
             opcionCalendario();
-        }
     }//GEN-LAST:event_tBtnCalendarioActionPerformed
 
-    private void grupoBotones (){
+    private void tBtnAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tBtnAsistenciaActionPerformed
+        if (tBtnAsistencia.isSelected())
+            opcionAsistencia();
+    }//GEN-LAST:event_tBtnAsistenciaActionPerformed
+
+    private void tBtnCalculoPlanillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tBtnCalculoPlanillaActionPerformed
+        if (tBtnCalculoPlanilla.isSelected())
+            opcionCalculoDePlanilla ();
+    }//GEN-LAST:event_tBtnCalculoPlanillaActionPerformed
+
+    private void txfBajasDesdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfBajasDesdeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfBajasDesdeActionPerformed
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void txfAusenciasDesdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfAusenciasDesdeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfAusenciasDesdeActionPerformed
+
+    private void btnConsultarAusenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarAusenciasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultarAusenciasActionPerformed
+
+    private void txfTardiasDesdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfTardiasDesdeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfTardiasDesdeActionPerformed
+
+    private void txfEmpleadosSinMarcaDesdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfEmpleadosSinMarcaDesdeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfEmpleadosSinMarcaDesdeActionPerformed
+
+    private void btnConsultarTardiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarTardiasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultarTardiasActionPerformed
+
+    private void btnConsultarEmpleadosSinMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarEmpleadosSinMarcaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultarEmpleadosSinMarcaActionPerformed
+
+    private void tBtnPlanillasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tBtnPlanillasActionPerformed
+        if (tBtnPlanillas.isSelected())
+            opcionPlanillas();
+    }//GEN-LAST:event_tBtnPlanillasActionPerformed
+    
+    // ********************************* INIT *********************************
+    private void agrupaciones (){
+        // botones menu
         ButtonGroup grupoBotones = new ButtonGroup ();
         grupoBotones.add(tBtnEmpleados);
         grupoBotones.add(tBtnCalendario);
         grupoBotones.add(tBtnAsistencia);
+        grupoBotones.add(tBtnCalculoPlanilla);
         grupoBotones.add(tBtnPlanillas);
         grupoBotones.add(tBtnConfiguracion);
+        focusListener();
+        opcionNull();
+        
     }
-    
     private void opcionNull (){
-        lblTitulo.setText("");
-        lblFiltros.setVisible(false);
-        lblSupervisor.setVisible(false);
-        lblDadosDeBaja.setVisible(false);
-        comboBoxSupervisores.setVisible(false); 
+        for (Component component : pnlPrincipal.getComponents()) {
+            if (component instanceof JPanel) {
+                JPanel panel = (JPanel) component;
+                panel.setVisible(false);
+            }
+        }
     }
   
+    // ******************************* OPCIONES *******************************
+    // EMPLEADOS
     private void opcionEmpleados (){    
         opcionNull();
-        lblTitulo.setText("Lista de Empleados");
-        DefaultTableModel modeloTabla = new DefaultTableModel ();
-        modeloTabla.addColumn("Código");
-        modeloTabla.addColumn("Nombre");
-        modeloTabla.addColumn("Apellidos");
-        modeloTabla.addColumn("Fecha Ingreso");
-        modeloTabla.addColumn("Fecha Salida");
-        modeloTabla.addColumn("Salario Bruto");
-        modeloTabla.addColumn("Salario / hora");
-        modeloTabla.addColumn("Tipo de Empleado");
-        modeloTabla.addColumn("Departamento");
-        modeloTabla.addColumn("Supervisor");
-        tblVista.setModel(modeloTabla);
-        if (tblVista.getColumnModel().getColumnCount() > 0) {
-            tblVista.getColumnModel().getColumn(0).setResizable(false);
-            tblVista.getColumnModel().getColumn(0).setPreferredWidth(36);
-            tblVista.getColumnModel().getColumn(1).setResizable(false);
-            tblVista.getColumnModel().getColumn(1).setPreferredWidth(73);
-            tblVista.getColumnModel().getColumn(2).setResizable(false);
-            tblVista.getColumnModel().getColumn(2).setPreferredWidth(125);
-            tblVista.getColumnModel().getColumn(3).setResizable(false);
-            tblVista.getColumnModel().getColumn(3).setPreferredWidth(75);
-            tblVista.getColumnModel().getColumn(4).setResizable(false);
-            tblVista.getColumnModel().getColumn(4).setPreferredWidth(70);
-            tblVista.getColumnModel().getColumn(5).setResizable(false);
-            tblVista.getColumnModel().getColumn(5).setPreferredWidth(75);
-            tblVista.getColumnModel().getColumn(6).setResizable(false);
-            tblVista.getColumnModel().getColumn(6).setPreferredWidth(82);
-            tblVista.getColumnModel().getColumn(7).setResizable(false);
-            tblVista.getColumnModel().getColumn(7).setPreferredWidth(100);
-            tblVista.getColumnModel().getColumn(8).setResizable(false);
-            tblVista.getColumnModel().getColumn(8).setPreferredWidth(80);
-            tblVista.getColumnModel().getColumn(9).setResizable(false);
-            tblVista.getColumnModel().getColumn(9).setPreferredWidth(55);
-        }
-        
-        //tblEmpleados.setVisible(true);  // luego se le cargan los datos
-                
-        lblFiltros.setVisible(true);
-        lblSupervisor.setVisible(true);
-        lblDadosDeBaja.setVisible(true);
-        comboBoxSupervisores.setVisible(true);  // luego se cargan la lista de supervisores   
+        pnlEmpleados.setVisible(true);
     }
 
+    // CALENDARIO LABORAL
     private void opcionCalendario (){
         opcionNull();
-        lblTitulo.setText("Lista de dias no laborables / feriados");
-        DefaultTableModel modeloTabla = new DefaultTableModel ();
-        modeloTabla.addColumn("ID");
-        modeloTabla.addColumn("Dia");
-        modeloTabla.addColumn("Tipo de dia");
-        modeloTabla.addColumn("Paga");
-        tblVista.setModel(modeloTabla);
-        
-        // poner opcion para agregar otro dia ?
+        pnlCalendario.setVisible(true);
     }
     
+    // ASISTENCIA
     private void opcionAsistencia (){
+        opcionNull();
+        pnlAsistencia.setVisible(true);
+    }    
     
+    // CALCULO DE PLANILLA
+    private void opcionCalculoDePlanilla (){
+        opcionNull();
+        pnlCalculoPlanilla.setVisible(true);
     }
     
+    // PLANILLAS
     private void opcionPlanillas (){
+        opcionNull();
+        pnlPlanillas.setVisible(true);
+    }
     
+    
+    // place holders
+    private void focusListener (){
+        // opcionEmpleados *****************************************************
+        //Filtros de consulta
+        txfIdFiltro.addFocusListener(new FocusListener() {        // ID
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfIdFiltro.getText().equals("Id")) {
+                    txfIdFiltro.setText("");      txfIdFiltro.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfIdFiltro.getText().isEmpty()) {
+                    txfIdFiltro.setForeground(Color.GRAY);    txfIdFiltro.setText("Id");
+                }
+            }
+        }); 
+        txfBajasDesde.addFocusListener(new FocusListener() {        // BajasDesde
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfBajasDesde.getText().equals("Desde (yyyy-mm-dd)")) {
+                    txfBajasDesde.setText("");                  txfBajasDesde.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfBajasDesde.getText().isEmpty()) {
+                    txfBajasDesde.setForeground(Color.GRAY);    txfBajasDesde.setText("Desde (yyyy-mm-dd)");
+                }
+            }
+        });
+        txfBajasHasta.addFocusListener(new FocusListener() {        // BajasHasta
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfBajasHasta.getText().equals("Hasta (yyyy-mm-dd)")) {
+                    txfBajasHasta.setText("");                  txfBajasHasta.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfBajasHasta.getText().isEmpty()) {
+                    txfBajasHasta.setForeground(Color.GRAY);    txfBajasHasta.setText("Hasta (yyyy-mm-dd)");
+                }
+            }
+        });
+        //Modificacion lista de empleados
+        txfId.addFocusListener(new FocusListener() {        // ID
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfId.getText().equals("Id")) {
+                    txfId.setText("");      txfId.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfId.getText().isEmpty()) {
+                    txfId.setForeground(Color.GRAY);    txfId.setText("Id");
+                }
+            }
+        });        
+        txfNombre.addFocusListener(new FocusListener() {        // Nombre
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfNombre.getText().equals("Nombre")) {
+                    txfNombre.setText("");        txfNombre.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfNombre.getText().isEmpty()) {
+                    txfNombre.setForeground(Color.GRAY);    txfNombre.setText("Nombre");
+                }
+            }
+        });
+        txfApellidos.addFocusListener(new FocusListener() {        // Apellidos
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfApellidos.getText().equals("Apellidos")) {
+                    txfApellidos.setText("");           txfApellidos.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfApellidos.getText().isEmpty()) {
+                    txfApellidos.setForeground(Color.GRAY);    txfApellidos.setText("Apellidos");
+                }
+            }
+        });
+        txfFechaEntrada.addFocusListener(new FocusListener() {        // FechaEntrada
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfFechaEntrada.getText().equals("Fecha de entrada (yyyy-mm-dd)")) {
+                    txfFechaEntrada.setText("");                  txfFechaEntrada.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfFechaEntrada.getText().isEmpty()) {
+                    txfFechaEntrada.setForeground(Color.GRAY);    txfFechaEntrada.setText("Fecha de entrada (yyyy-mm-dd)");
+                }
+            }
+        });
+        txfFechaSalida.addFocusListener(new FocusListener() {        // FechaSalida
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfFechaSalida.getText().equals("Fecha de salida (yyyy-mm-dd)")) {
+                    txfFechaSalida.setText("");                  txfFechaSalida.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfFechaSalida.getText().isEmpty()) {
+                    txfFechaSalida.setForeground(Color.GRAY);    txfFechaSalida.setText("Fecha de salida (yyyy-mm-dd)");
+                }
+            }
+        });
+        txfDepartamento.addFocusListener(new FocusListener() {        // Departamento
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfDepartamento.getText().equals("Departamento")) {
+                    txfDepartamento.setText("");        txfDepartamento.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfDepartamento.getText().isEmpty()) {
+                    txfDepartamento.setForeground(Color.GRAY);    txfDepartamento.setText("Departamento");
+                }
+            }
+        });
+        txfSupervisor.addFocusListener(new FocusListener() {        // Supervisor
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfSupervisor.getText().equals("Supervisor")) {
+                    txfSupervisor.setText("");        txfSupervisor.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfSupervisor.getText().isEmpty()) {
+                    txfSupervisor.setForeground(Color.GRAY);    txfSupervisor.setText("Supervisor");
+                }
+            }
+        });
+        txfCalendario.addFocusListener(new FocusListener() {        // Calendario
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfCalendario.getText().equals("Calendario")) {
+                    txfCalendario.setText("");        txfCalendario.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfCalendario.getText().isEmpty()) {
+                    txfCalendario.setForeground(Color.GRAY);    txfCalendario.setText("Calendario");
+                }
+            }
+        });
+        // Dar de baja
+        txfIdEliminar.addFocusListener(new FocusListener() {        // ID eliminar
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfIdEliminar.getText().equals("Id")) {
+                    txfIdEliminar.setText("");      txfIdEliminar.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfIdEliminar.getText().isEmpty()) {
+                    txfIdEliminar.setForeground(Color.GRAY);    txfIdEliminar.setText("Id");
+                }
+            }
+        });  
+        txfFechaBaja.addFocusListener(new FocusListener() {        // FechaBaja
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfFechaBaja.getText().equals("Fecha de salida (yyyy-mm-dd)")) {
+                    txfFechaBaja.setText("");                  txfFechaBaja.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfFechaBaja.getText().isEmpty()) {
+                    txfFechaBaja.setForeground(Color.GRAY);    txfFechaBaja.setText("Fecha de salida (yyyy-mm-dd)");
+                }
+            }
+        });
+        
+        // opcionAsistencia ****************************************************
+        txfAusenciasDesde.addFocusListener(new FocusListener() {        // Ausencias desde
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfAusenciasDesde.getText().equals("Desde (yyyy-mm-dd)")) {
+                    txfAusenciasDesde.setText("");                  txfAusenciasDesde.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfAusenciasDesde.getText().isEmpty()) {
+                    txfAusenciasDesde.setForeground(Color.GRAY);    txfAusenciasDesde.setText("Desde (yyyy-mm-dd)");
+                }
+            }
+        });
+        txfAusenciasHasta.addFocusListener(new FocusListener() {        // Ausencias hasta
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfAusenciasHasta.getText().equals("Hasta (yyyy-mm-dd)")) {
+                    txfAusenciasHasta.setText("");                  txfAusenciasHasta.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfAusenciasHasta.getText().isEmpty()) {
+                    txfAusenciasHasta.setForeground(Color.GRAY);    txfAusenciasHasta.setText("Hasta (yyyy-mm-dd)");
+                }
+            }
+        });
+        txfTardiasDesde.addFocusListener(new FocusListener() {        // Tardias desde
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfTardiasDesde.getText().equals("Desde (yyyy-mm-dd)")) {
+                    txfTardiasDesde.setText("");                  txfTardiasDesde.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfTardiasDesde.getText().isEmpty()) {
+                    txfTardiasDesde.setForeground(Color.GRAY);    txfTardiasDesde.setText("Desde (yyyy-mm-dd)");
+                }
+            }
+        });
+        txfTardiasHasta.addFocusListener(new FocusListener() {        // Tardias hasta
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfTardiasHasta.getText().equals("Hasta (yyyy-mm-dd)")) {
+                    txfTardiasHasta.setText("");                  txfTardiasHasta.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfTardiasHasta.getText().isEmpty()) {
+                    txfTardiasHasta.setForeground(Color.GRAY);    txfTardiasHasta.setText("Hasta (yyyy-mm-dd)");
+                }
+            }
+        });
+        txfEmpleadosSinMarcaDesde.addFocusListener(new FocusListener() {        // Empleados sin marca desde
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfEmpleadosSinMarcaDesde.getText().equals("Desde (yyyy-mm-dd)")) {
+                    txfEmpleadosSinMarcaDesde.setText("");                  txfEmpleadosSinMarcaDesde.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfEmpleadosSinMarcaDesde.getText().isEmpty()) {
+                    txfEmpleadosSinMarcaDesde.setForeground(Color.GRAY);    txfEmpleadosSinMarcaDesde.setText("Desde (yyyy-mm-dd)");
+                }
+            }
+        });
+        txfEmpleadosSinMarcaHasta.addFocusListener(new FocusListener() {        // Empleados sin marca hasta
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfEmpleadosSinMarcaHasta.getText().equals("Hasta (yyyy-mm-dd)")) {
+                    txfEmpleadosSinMarcaHasta.setText("");                  txfEmpleadosSinMarcaHasta.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfEmpleadosSinMarcaHasta.getText().isEmpty()) {
+                    txfEmpleadosSinMarcaHasta.setForeground(Color.GRAY);    txfEmpleadosSinMarcaHasta.setText("Hasta (yyyy-mm-dd)");
+                }
+            }
+        });
     }
     
     /**
@@ -364,6 +1333,8 @@ public class vistaPlanta extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -374,22 +1345,93 @@ public class vistaPlanta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCalcularPlanilla;
+    private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnConsultarAsistencia;
+    private javax.swing.JButton btnConsultarAusencias;
+    private javax.swing.JButton btnConsultarEmpleados;
+    private javax.swing.JButton btnConsultarEmpleadosSinMarca;
+    private javax.swing.JButton btnConsultarPlanillas;
+    private javax.swing.JButton btnConsultarTardias;
+    private javax.swing.JButton btnEliminarEmpleado;
+    private javax.swing.JButton btnEnviarPlanilla;
+    private javax.swing.JButton btnInsertarEmpleado;
+    private javax.swing.JButton btnModificarEmpleado;
     private javax.swing.JCheckBox checkModoPrueba;
-    private javax.swing.JComboBox<String> comboBoxSupervisores;
+    private javax.swing.JComboBox<String> comboCalendarios;
+    private javax.swing.JComboBox<String> comboDepartamento;
+    private javax.swing.JComboBox<String> comboSupervisor;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JLabel lblAsistencia;
+    private javax.swing.JLabel lblAusencias;
+    private javax.swing.JLabel lblCalculoPlanillas;
+    private javax.swing.JLabel lblCalendario;
+    private javax.swing.JLabel lblCalendarioSeleccionado;
     private javax.swing.JLabel lblDadosDeBaja;
+    private javax.swing.JLabel lblDepartamento;
+    private javax.swing.JLabel lblEmpleado;
+    private javax.swing.JLabel lblEmpleadoBaja;
+    private javax.swing.JLabel lblEmpleadosSinMarcaSalida;
+    private javax.swing.JLabel lblFeriados;
     private javax.swing.JLabel lblFiltros;
+    private javax.swing.JLabel lblFiltrosAsistencia;
+    private javax.swing.JLabel lblJornadaLaboral;
+    private javax.swing.JLabel lblModificacionEmpleados;
     private javax.swing.JLabel lblNombrePlanta;
+    private javax.swing.JLabel lblPlanillas;
+    private javax.swing.JLabel lblSalarios;
     private javax.swing.JLabel lblSupervisor;
+    private javax.swing.JLabel lblTardias;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JPanel pnlAsistencia;
+    private javax.swing.JPanel pnlCalculoPlanilla;
+    private javax.swing.JPanel pnlCalendario;
+    private javax.swing.JPanel pnlEmpleados;
     private javax.swing.JPanel pnlEncabezado;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JPanel pnlMenu;
+    private javax.swing.JPanel pnlPlanillas;
+    private javax.swing.JPanel pnlPrincipal;
+    private javax.swing.JScrollPane scrollPrincipal;
+    private javax.swing.JScrollPane scrollPrincipal1;
     private javax.swing.JToggleButton tBtnAsistencia;
+    private javax.swing.JToggleButton tBtnCalculoPlanilla;
     private javax.swing.JToggleButton tBtnCalendario;
     private javax.swing.JToggleButton tBtnConfiguracion;
     private javax.swing.JToggleButton tBtnEmpleados;
     private javax.swing.JToggleButton tBtnPlanillas;
-    private javax.swing.JTable tblVista;
+    private javax.swing.JToggleButton tbtnAprobarPlanilla;
+    private javax.swing.JToggleButton tbtnRechazarPlanilla;
+    private javax.swing.JTextArea txaAsistencia;
+    private javax.swing.JTextArea txaCalendario;
+    private javax.swing.JTextArea txaFeriados;
+    private javax.swing.JTextArea txaJornada;
+    private javax.swing.JTextArea txaPlanillasPlanta;
+    private javax.swing.JTextArea txaPrincipal;
+    private javax.swing.JTextArea txaSalarios;
+    private javax.swing.JTextField txfApellidos;
+    private javax.swing.JTextField txfAusenciasDesde;
+    private javax.swing.JTextField txfAusenciasHasta;
+    private javax.swing.JTextField txfBajasDesde;
+    private javax.swing.JTextField txfBajasHasta;
+    private javax.swing.JTextField txfCalendario;
+    private javax.swing.JTextField txfDepartamento;
+    private javax.swing.JTextField txfEmpleadosSinMarcaDesde;
+    private javax.swing.JTextField txfEmpleadosSinMarcaHasta;
+    private javax.swing.JTextField txfFechaBaja;
+    private javax.swing.JTextField txfFechaEntrada;
+    private javax.swing.JTextField txfFechaSalida;
+    private javax.swing.JTextField txfId;
+    private javax.swing.JTextField txfIdEliminar;
+    private javax.swing.JTextField txfIdFiltro;
+    private javax.swing.JTextField txfNombre;
+    private javax.swing.JTextField txfSupervisor;
+    private javax.swing.JTextField txfTardiasDesde;
+    private javax.swing.JTextField txfTardiasHasta;
     // End of variables declaration//GEN-END:variables
 }

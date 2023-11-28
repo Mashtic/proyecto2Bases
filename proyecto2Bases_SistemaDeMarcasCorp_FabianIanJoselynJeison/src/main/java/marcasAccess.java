@@ -1,4 +1,6 @@
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -12,6 +14,11 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Random;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JOptionPane;
 
 /*
@@ -30,6 +37,17 @@ public class marcasAccess {
     private static boolean tiene30Dias(int mes) {
         return mes == 4 || mes == 6 || mes == 9 || mes == 11;
     }
+    
+    public static void ReproducirSonido(String nombreSonido){
+       try {
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(nombreSonido).getAbsoluteFile());
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        clip.start();
+       } catch(UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+         System.out.println("Error al reproducir el sonido.");
+       }
+     }
     public static void crearMarcas(int codEmpleado, int annoI, int mesI, int diaI, int annoF, int mesF, int diaF, int porcentajeAusencia, int planta ) throws ParseException{
         try {
             mySQLConnectionSimul SQL = new mySQLConnectionSimul();
@@ -181,14 +199,17 @@ public class marcasAccess {
                         }
                     }
                 }
+                ReproducirSonido("C:\\Users\\fabia\\OneDrive\\Escritorio\\sound\\Minecraft-XP-Sound.wav");
                 JOptionPane.showMessageDialog(null, "Felicidades se añadieron las marcas de tiempo", "Confirmación de ingreso de datos", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println("Terminado");
             }
             else
             {
+                ReproducirSonido("C:\\Users\\fabia\\OneDrive\\Escritorio\\sound\\GTA-V-Wasted.wav");
                 JOptionPane.showMessageDialog(null, "Error, el usuario ingresado no existe en la Base de Datos", "Error", JOptionPane.ERROR_MESSAGE);
                 
-            }    
+            } 
+            conn.close();
             /*
         // Suponiendo que tienes una variable de conexión 'conn'.
             String query = "{CALL CheckEmpleadoExists(?, ?)}";

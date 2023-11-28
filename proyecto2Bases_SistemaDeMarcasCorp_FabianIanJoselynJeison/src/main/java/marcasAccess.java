@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,6 +35,23 @@ public class marcasAccess {
             mySQLConnectionSimul SQL = new mySQLConnectionSimul();
             // Llamas al método que tiene la clase y te devuelve una conexión
             Connection conn = SQL.conectarMySQL(planta);
+            String query = "{CALL CheckEmpleadoExists(?, ?)}";
+            CallableStatement stmt = conn.prepareCall(query);
+
+            // Establecer el parámetro para el procedimiento almacenado
+            stmt.setInt(1, codEmpleado); // Suponiendo que 'codEmpleado' es un int
+
+            // Registrar el parámetro de salida
+            stmt.registerOutParameter(2, Types.BIT);
+
+            // Ejecutar el procedimiento almacenado
+            stmt.execute();
+
+            // Leer el parámetro de salida
+            boolean empleadoExists = stmt.getBoolean(2);
+
+            // Usar 'empleadoExists' según sea necesario en tu aplicación
+            System.out.println("Empleado exists: " + empleadoExists);
             // Query que usarás para hacer lo que necesites
             String sSQL =   "";
             String fecha="";
@@ -54,116 +72,123 @@ public class marcasAccess {
             restaAnno=annoF-annoI;
             restaMes=mesF-mesI;
             restaDia=diaF-diaI;
-            if (restaAnno!=0)
-                cantDias=cantDias+365;
-            if (restaMes!=0)
-                cantDias=cantDias+30;
-            if (restaDia!=0)
-                cantDias=cantDias+restaDia;
-            for (int i = 0; i < cantDias+1; i++) {
-                probabilidadSalto=porcentaje.nextInt(100);
-                if (probabilidadSalto>porcentajeAusencia) {
-                    do {            
-                        minutoE=minutos.nextInt(60);
-                        minutoS=minutos.nextInt(60);
-                        horaE=hora.nextInt(24);
-                        horaS=hora.nextInt(24);
-                        horaEntrada=(minutoE+horaE*100);
-                        horaSalida=(minutoS+horaS*100);
+            if (empleadoExists) {
+                if (restaAnno!=0)
+                    cantDias=cantDias+365;
+                if (restaMes!=0)
+                    cantDias=cantDias+30;
+                if (restaDia!=0)
+                    cantDias=cantDias+restaDia;
+                for (int i = 0; i < cantDias+1; i++) {
+                    probabilidadSalto=porcentaje.nextInt(100);
+                    if (probabilidadSalto>porcentajeAusencia) {
+                        do {            
+                            minutoE=minutos.nextInt(60);
+                            minutoS=minutos.nextInt(60);
+                            horaE=hora.nextInt(24);
+                            horaS=hora.nextInt(24);
+                            horaEntrada=(minutoE+horaE*100);
+                            horaSalida=(minutoS+horaS*100);
 
-                    } while (horaSalida<horaEntrada);
+                        } while (horaSalida<horaEntrada);
 
-                        String horaEntradaString  =  horaE+":"+minutoE;
-                        String horaSalidaString  =  horaS+":"+minutoS;
-                        DateFormat formatter = new SimpleDateFormat("HH:mm");
-                        java.sql.Time timeEntrada = new java.sql.Time(formatter.parse(horaEntradaString).getTime());
-                        java.sql.Time timeSalida = new java.sql.Time(formatter.parse(horaSalidaString).getTime());
-                    if (tiene30Dias(mesI)){
-                        if (diaI<=30) {
-                            fecha=annoI+"-"+mesI+"-"+diaI; 
-                            /*Se envía el dato a la base de datos */
-                            diaI=diaI+1;
-                            sSQL="CALL InsertMarcaPlanta(?,?,?,?)";
-                            CallableStatement a=conn.prepareCall(sSQL);
-                            a.setInt(1, codEmpleado);
-                            a.setDate(2,java.sql.Date.valueOf(fecha));
-                            a.setTime(3, timeEntrada);
-                            a.setTime(4, timeSalida);
+                            String horaEntradaString  =  horaE+":"+minutoE;
+                            String horaSalidaString  =  horaS+":"+minutoS;
+                            DateFormat formatter = new SimpleDateFormat("HH:mm");
+                            java.sql.Time timeEntrada = new java.sql.Time(formatter.parse(horaEntradaString).getTime());
+                            java.sql.Time timeSalida = new java.sql.Time(formatter.parse(horaSalidaString).getTime());
+                        if (tiene30Dias(mesI)){
+                            if (diaI<=30) {
+                                fecha=annoI+"-"+mesI+"-"+diaI; 
+                                /*Se envía el dato a la base de datos */
+                                diaI=diaI+1;
+                                sSQL="CALL InsertMarcaPlanta(?,?,?,?)";
+                                CallableStatement a=conn.prepareCall(sSQL);
+                                a.setInt(1, codEmpleado);
+                                a.setDate(2,java.sql.Date.valueOf(fecha));
+                                a.setTime(3, timeEntrada);
+                                a.setTime(4, timeSalida);
 
-                            a.execute();
-                            System.out.println(fecha+ " "+horaEntrada+" "+horaSalida);
+                                a.execute();
+                                System.out.println(fecha+ " "+horaEntrada+" "+horaSalida);
+                            }
+                            else{
+                                diaI=01;
+                                mesI=mesI+1;
+                                fecha=annoI+"-"+mesI+"-"+diaI;
+                                /*Se envía el dato a la base de datos */
+                                sSQL="CALL InsertMarcaPlanta(?,?,?,?)";
+                                CallableStatement b=conn.prepareCall(sSQL);
+                                b.setInt(1, codEmpleado);
+                                b.setDate(2,java.sql.Date.valueOf(fecha));
+                                b.setTime(3, timeEntrada);
+                                b.setTime(4, timeSalida);
+
+                                b.execute();
+                                System.out.println(fecha+ " "+horaEntrada+" "+horaSalida);
+                            }
                         }
                         else{
-                            diaI=01;
-                            mesI=mesI+1;
-                            fecha=annoI+"-"+mesI+"-"+diaI;
-                            /*Se envía el dato a la base de datos */
-                            sSQL="CALL InsertMarcaPlanta(?,?,?,?)";
-                            CallableStatement b=conn.prepareCall(sSQL);
-                            b.setInt(1, codEmpleado);
-                            b.setDate(2,java.sql.Date.valueOf(fecha));
-                            b.setTime(3, timeEntrada);
-                            b.setTime(4, timeSalida);
+                            if (diaI<=31) {
+                                fecha=annoI+"-"+mesI+"-"+diaI;
+                                /*Se envía el dato a la base de datos */
+                                sSQL="CALL InsertMarcaPlanta(?,?,?,?)";
+                                CallableStatement c=conn.prepareCall(sSQL);
+                                c.setInt(1, codEmpleado);
+                                c.setDate(2,java.sql.Date.valueOf(fecha));
+                                c.setTime(3, timeEntrada);
+                                c.setTime(4, timeSalida);
 
-                            b.execute();
-                            System.out.println(fecha+ " "+horaEntrada+" "+horaSalida);
+                                c.execute();
+                                diaI=diaI+1;
+                                System.out.println(fecha+ " "+horaEntrada+" "+horaSalida);
+                            }
+                            else{
+                                diaI=01;
+                                mesI=mesI+1;
+                                fecha=annoI+"-"+mesI+"-"+diaI;
+                                /*Se envía el dato a la base de datos */
+                                sSQL="CALL InsertMarcaPlanta(?,?,?,?) ";
+                                CallableStatement d=conn.prepareCall(sSQL);
+                                d.setInt(1, codEmpleado);
+                                d.setDate(2,java.sql.Date.valueOf(fecha));
+                                d.setTime(3, timeEntrada);
+                                d.setTime(4, timeSalida);
+
+                                d.execute();
+                                System.out.println(fecha+ " "+horaEntrada+" "+horaSalida);
+                            }
                         }
                     }
                     else{
-                        if (diaI<=31) {
-                            fecha=annoI+"-"+mesI+"-"+diaI;
-                            /*Se envía el dato a la base de datos */
-                            sSQL="CALL InsertMarcaPlanta(?,?,?,?)";
-                            CallableStatement c=conn.prepareCall(sSQL);
-                            c.setInt(1, codEmpleado);
-                            c.setDate(2,java.sql.Date.valueOf(fecha));
-                            c.setTime(3, timeEntrada);
-                            c.setTime(4, timeSalida);
-
-                            c.execute();
-                            diaI=diaI+1;
-                            System.out.println(fecha+ " "+horaEntrada+" "+horaSalida);
+                        if (tiene30Dias(mesI)){
+                            if (diaI<=30) {
+                                diaI=diaI+1;
+                            }
+                            else{
+                                diaI=01;
+                                mesI=mesI+1;
+                            }
                         }
                         else{
-                            diaI=01;
-                            mesI=mesI+1;
-                            fecha=annoI+"-"+mesI+"-"+diaI;
-                            /*Se envía el dato a la base de datos */
-                            sSQL="CALL InsertMarcaPlanta(?,?,?,?) ";
-                            CallableStatement d=conn.prepareCall(sSQL);
-                            d.setInt(1, codEmpleado);
-                            d.setDate(2,java.sql.Date.valueOf(fecha));
-                            d.setTime(3, timeEntrada);
-                            d.setTime(4, timeSalida);
-
-                            d.execute();
-                            System.out.println(fecha+ " "+horaEntrada+" "+horaSalida);
+                            if (diaI<=31) {
+                                diaI=diaI+1;
+                            }
+                            else{
+                                diaI=01;
+                                mesI=mesI+1;
+                            }
                         }
                     }
                 }
-                else{
-                    if (tiene30Dias(mesI)){
-                        if (diaI<=30) {
-                            diaI=diaI+1;
-                        }
-                        else{
-                            diaI=01;
-                            mesI=mesI+1;
-                        }
-                    }
-                    else{
-                        if (diaI<=31) {
-                            diaI=diaI+1;
-                        }
-                        else{
-                            diaI=01;
-                            mesI=mesI+1;
-                        }
-                    }
-                }
+                JOptionPane.showMessageDialog(null, "Felicidades se añadieron las marcas de tiempo", "Confirmación de ingreso de datos", JOptionPane.INFORMATION_MESSAGE);
+                System.out.println("Terminado");
             }
-            JOptionPane.showMessageDialog(null, "Felicidades se añadieron las marcas de tiempo", "Confirmación de ingreso de datos", JOptionPane.INFORMATION_MESSAGE);
-            System.out.println("Terminado");
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Error, el usuario ingresado no existe en la Base de Datos", "Error", JOptionPane.ERROR_MESSAGE);
+                
+            }    
             /*
         // Suponiendo que tienes una variable de conexión 'conn'.
             String query = "{CALL CheckEmpleadoExists(?, ?)}";

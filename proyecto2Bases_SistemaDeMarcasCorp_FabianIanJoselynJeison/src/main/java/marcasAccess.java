@@ -199,13 +199,13 @@ public class marcasAccess {
                         }
                     }
                 }
-                ReproducirSonido("C:\\Users\\fabia\\OneDrive\\Escritorio\\sound\\Minecraft-XP-Sound.wav");
+                ReproducirSonido("src\\sound\\Minecraft-XP-Sound.wav");
                 JOptionPane.showMessageDialog(null, "Felicidades se añadieron las marcas de tiempo", "Confirmación de ingreso de datos", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println("Terminado");
             }
             else
             {
-                ReproducirSonido("C:\\Users\\fabia\\OneDrive\\Escritorio\\sound\\GTA-V-Wasted.wav");
+                ReproducirSonido("src\\sound\\GTA-V-Wasted.wav");
                 JOptionPane.showMessageDialog(null, "Error, el usuario ingresado no existe en la Base de Datos", "Error", JOptionPane.ERROR_MESSAGE);
                 
             } 

@@ -246,12 +246,26 @@ public class simuladorMarcas extends javax.swing.JFrame {
             marcasAccess.crearMarcas(Integer.parseInt(txf_LoginUsuario.getText()), Integer.parseInt(txf_Anno.getText())
                     , Integer.parseInt(txf_Mes.getText()), Integer.parseInt(txf_Dia.getText())
                     , Integer.parseInt(txf_AnnoS.getText()), Integer.parseInt(txf_MesS.getText())
-                    , Integer.parseInt(txf_DiaS.getText()), Integer.parseInt(txf_PAusentismo.getText()),Integer.parseInt(txf_Planta.getText()));
+                    , Integer.parseInt(txf_DiaS.getText()), Integer.parseInt(txf_PAusentismo.getText())
+                    ,Integer.parseInt(txf_Planta.getText()));
+            resetearTxf();
         } catch (ParseException ex) {
             Logger.getLogger(simuladorMarcas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_CrearMarcasActionPerformed
-
+    private void resetearTxf(){
+        txf_LoginUsuario.setText("");
+        txf_Anno.setText("");
+        txf_Mes.setText("");
+        txf_Dia.setText("");
+        txf_AnnoS.setText("");
+        txf_MesS.setText("");
+        txf_DiaS.setText("");
+        txf_PAusentismo.setText("");
+        txf_Planta.setText("");
+        
+        
+    }
     /**
      * @param args the command line arguments
      */

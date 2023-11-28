@@ -84,12 +84,17 @@ public class marcasAccess {
             int minutoE=0;
             int minutoS=0;
             int probabilidadSalto=0;
+            int fI=((annoI*10000)+(mesI*100)+(diaI));
+            int fF=((annoF*10000)+(mesF*100)+(diaF));
             Random hora= new Random();
             Random minutos=new Random();
             Random porcentaje=new Random();
             restaAnno=annoF-annoI;
             restaMes=mesF-mesI;
             restaDia=diaF-diaI;
+            if (empleadoExists) {
+                
+            }
             if (empleadoExists) {
                 if (restaAnno!=0)
                     cantDias=cantDias+365;

@@ -8,14 +8,29 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
-public class vistaPlanta extends javax.swing.JFrame {
+public class vistaPlantaGuayabo extends javax.swing.JFrame {
 
-    public vistaPlanta() {
+    private SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+    private boolean modoPrueba = false;
+    
+    public vistaPlantaGuayabo() {
         initComponents();
+        GuayaboAccess.inicializarBoxDepartamento(comboDepartamento);
+        comboDepartamento.setSelectedIndex(-1);
+        GuayaboAccess.inicializarBoxSupervisor(comboSupervisor);
+        comboSupervisor.setSelectedIndex(-1);
+        GuayaboAccess.inicializarBoxTipoPagos(comboTipoPago);
+        comboTipoPago.setSelectedIndex(-1);
         agrupaciones();
     }
 
@@ -103,7 +118,7 @@ public class vistaPlanta extends javax.swing.JFrame {
         pnlCalculoPlanilla = new javax.swing.JPanel();
         lblCalculoPlanillas = new javax.swing.JLabel();
         lblCalendarioSeleccionado = new javax.swing.JLabel();
-        comboCalendarios = new javax.swing.JComboBox<>();
+        comboTipoPago = new javax.swing.JComboBox<>();
         lblSalarios = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txaSalarios = new javax.swing.JTextArea();
@@ -111,11 +126,12 @@ public class vistaPlanta extends javax.swing.JFrame {
         tbtnRechazarPlanilla = new javax.swing.JToggleButton();
         btnEnviarPlanilla = new javax.swing.JButton();
         btnCalcularPlanilla = new javax.swing.JButton();
+        comboMeses = new javax.swing.JComboBox<>();
+        comboSemanas = new javax.swing.JComboBox<>();
         pnlPlanillas = new javax.swing.JPanel();
         lblPlanillas = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         txaPlanillasPlanta = new javax.swing.JTextArea();
-        btnConsultarPlanillas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -215,11 +231,16 @@ public class vistaPlanta extends javax.swing.JFrame {
 
         lblNombrePlanta.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         lblNombrePlanta.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombrePlanta.setText("Nombre de Planta");
+        lblNombrePlanta.setText("Planta Guayabo");
 
         checkModoPrueba.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         checkModoPrueba.setForeground(new java.awt.Color(255, 255, 255));
         checkModoPrueba.setText("Modo Prueba");
+        checkModoPrueba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkModoPruebaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlEncabezadoLayout = new javax.swing.GroupLayout(pnlEncabezado);
         pnlEncabezado.setLayout(pnlEncabezadoLayout);
@@ -265,16 +286,20 @@ public class vistaPlanta extends javax.swing.JFrame {
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Lista de empleados");
 
-        txaPrincipal.setColumns(20);
+        txaPrincipal.setColumns(50);
         txaPrincipal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txaPrincipal.setRows(5);
-        txaPrincipal.setPreferredSize(new java.awt.Dimension(938, 298));
+        txaPrincipal.setRows(100);
         scrollPrincipal.setViewportView(txaPrincipal);
 
         btnConsultarEmpleados.setBackground(new java.awt.Color(0, 51, 153));
         btnConsultarEmpleados.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         btnConsultarEmpleados.setForeground(new java.awt.Color(255, 255, 255));
         btnConsultarEmpleados.setText("Consultar empleados");
+        btnConsultarEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarEmpleadosActionPerformed(evt);
+            }
+        });
 
         lblFiltros.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         lblFiltros.setText("Filtros de consulta:");
@@ -361,11 +386,21 @@ public class vistaPlanta extends javax.swing.JFrame {
         btnInsertarEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         btnInsertarEmpleado.setForeground(new java.awt.Color(255, 255, 255));
         btnInsertarEmpleado.setText("Insertar");
+        btnInsertarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertarEmpleadoActionPerformed(evt);
+            }
+        });
 
         btnModificarEmpleado.setBackground(new java.awt.Color(0, 51, 153));
         btnModificarEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         btnModificarEmpleado.setForeground(new java.awt.Color(255, 255, 255));
         btnModificarEmpleado.setText("Modificar");
+        btnModificarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarEmpleadoActionPerformed(evt);
+            }
+        });
 
         lblEmpleadoBaja.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         lblEmpleadoBaja.setText("Ingrese el id del empleado que quiere dar de baja:");
@@ -382,6 +417,11 @@ public class vistaPlanta extends javax.swing.JFrame {
         btnEliminarEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         btnEliminarEmpleado.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminarEmpleado.setText("Dar de baja");
+        btnEliminarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarEmpleadoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlEmpleadosLayout = new javax.swing.GroupLayout(pnlEmpleados);
         pnlEmpleados.setLayout(pnlEmpleadosLayout);
@@ -523,8 +563,8 @@ public class vistaPlanta extends javax.swing.JFrame {
         lblJornadaLaboral.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblJornadaLaboral.setText("Jornada Laboral");
 
-        txaJornada.setColumns(20);
-        txaJornada.setRows(5);
+        txaJornada.setColumns(25);
+        txaJornada.setRows(25);
         jScrollPane2.setViewportView(txaJornada);
 
         lblFeriados.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -532,12 +572,12 @@ public class vistaPlanta extends javax.swing.JFrame {
         lblFeriados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblFeriados.setText("Lista de feriados");
 
-        txaFeriados.setColumns(20);
-        txaFeriados.setRows(5);
+        txaFeriados.setColumns(25);
+        txaFeriados.setRows(25);
         jScrollPane3.setViewportView(txaFeriados);
 
-        txaCalendario.setColumns(20);
-        txaCalendario.setRows(5);
+        txaCalendario.setColumns(25);
+        txaCalendario.setRows(25);
         jScrollPane4.setViewportView(txaCalendario);
 
         javax.swing.GroupLayout pnlCalendarioLayout = new javax.swing.GroupLayout(pnlCalendario);
@@ -559,16 +599,16 @@ public class vistaPlanta extends javax.swing.JFrame {
             .addGroup(pnlCalendarioLayout.createSequentialGroup()
                 .addComponent(lblCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(lblJornadaLaboral, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addComponent(lblFeriados, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pnlPrincipal.add(pnlCalendario, "card6");
@@ -578,16 +618,20 @@ public class vistaPlanta extends javax.swing.JFrame {
         lblAsistencia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAsistencia.setText("Asistencia de empleados");
 
-        txaAsistencia.setColumns(20);
+        txaAsistencia.setColumns(50);
         txaAsistencia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txaAsistencia.setRows(5);
-        txaAsistencia.setPreferredSize(new java.awt.Dimension(938, 298));
+        txaAsistencia.setRows(1000);
         scrollPrincipal1.setViewportView(txaAsistencia);
 
         btnConsultarAsistencia.setBackground(new java.awt.Color(0, 51, 153));
         btnConsultarAsistencia.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         btnConsultarAsistencia.setForeground(new java.awt.Color(255, 255, 255));
         btnConsultarAsistencia.setText("Consultar asistencia");
+        btnConsultarAsistencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarAsistenciaActionPerformed(evt);
+            }
+        });
 
         lblFiltrosAsistencia.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         lblFiltrosAsistencia.setText("Filtros de consulta:");
@@ -759,13 +803,13 @@ public class vistaPlanta extends javax.swing.JFrame {
         lblCalendarioSeleccionado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCalendarioSeleccionado.setText("Seleccione el calendario que se va a pagar:");
 
-        comboCalendarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        comboTipoPago.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lblSalarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblSalarios.setText("Salarios:");
 
         txaSalarios.setColumns(20);
-        txaSalarios.setRows(5);
+        txaSalarios.setRows(100);
         jScrollPane1.setViewportView(txaSalarios);
 
         tbtnAprobarPlanilla.setBackground(new java.awt.Color(51, 153, 0));
@@ -782,11 +826,30 @@ public class vistaPlanta extends javax.swing.JFrame {
         btnEnviarPlanilla.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnEnviarPlanilla.setForeground(new java.awt.Color(255, 255, 255));
         btnEnviarPlanilla.setText("Enviar planilla a coorporación");
+        btnEnviarPlanilla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarPlanillaActionPerformed(evt);
+            }
+        });
 
         btnCalcularPlanilla.setBackground(new java.awt.Color(0, 51, 153));
         btnCalcularPlanilla.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         btnCalcularPlanilla.setForeground(new java.awt.Color(255, 255, 255));
         btnCalcularPlanilla.setText("Calcular Planilla");
+        btnCalcularPlanilla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularPlanillaActionPerformed(evt);
+            }
+        });
+
+        comboMeses.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        comboMeses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre" }));
+        comboMeses.setSelectedIndex(-1);
+        comboMeses.setToolTipText("");
+
+        comboSemanas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        comboSemanas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
+        comboSemanas.setSelectedIndex(-1);
 
         javax.swing.GroupLayout pnlCalculoPlanillaLayout = new javax.swing.GroupLayout(pnlCalculoPlanilla);
         pnlCalculoPlanilla.setLayout(pnlCalculoPlanillaLayout);
@@ -800,7 +863,7 @@ public class vistaPlanta extends javax.swing.JFrame {
                 .addGap(244, 244, 244)
                 .addGroup(pnlCalculoPlanillaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnEnviarPlanilla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnlCalculoPlanillaLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCalculoPlanillaLayout.createSequentialGroup()
                         .addComponent(tbtnAprobarPlanilla, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
                         .addComponent(tbtnRechazarPlanilla, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -812,10 +875,13 @@ public class vistaPlanta extends javax.swing.JFrame {
             .addGroup(pnlCalculoPlanillaLayout.createSequentialGroup()
                 .addComponent(lblCalendarioSeleccionado)
                 .addGap(18, 18, 18)
-                .addComponent(comboCalendarios, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(comboTipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboMeses, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCalcularPlanilla, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69))
+                .addComponent(btnCalcularPlanilla, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pnlCalculoPlanillaLayout.setVerticalGroup(
             pnlCalculoPlanillaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -824,19 +890,21 @@ public class vistaPlanta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCalculoPlanillaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCalendarioSeleccionado)
-                    .addComponent(comboCalendarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCalcularPlanilla))
+                    .addComponent(comboTipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCalcularPlanilla)
+                    .addComponent(comboMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblSalarios)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCalculoPlanillaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tbtnAprobarPlanilla)
                     .addComponent(tbtnRechazarPlanilla))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnEnviarPlanilla, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pnlPrincipal.add(pnlCalculoPlanilla, "card3");
@@ -850,11 +918,6 @@ public class vistaPlanta extends javax.swing.JFrame {
         txaPlanillasPlanta.setRows(5);
         jScrollPane5.setViewportView(txaPlanillasPlanta);
 
-        btnConsultarPlanillas.setBackground(new java.awt.Color(0, 51, 153));
-        btnConsultarPlanillas.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        btnConsultarPlanillas.setForeground(new java.awt.Color(255, 255, 255));
-        btnConsultarPlanillas.setText("Consultar planillas");
-
         javax.swing.GroupLayout pnlPlanillasLayout = new javax.swing.GroupLayout(pnlPlanillas);
         pnlPlanillas.setLayout(pnlPlanillasLayout);
         pnlPlanillasLayout.setHorizontalGroup(
@@ -864,20 +927,14 @@ public class vistaPlanta extends javax.swing.JFrame {
                 .addComponent(lblPlanillas, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(jScrollPane5)
-            .addGroup(pnlPlanillasLayout.createSequentialGroup()
-                .addGap(328, 328, 328)
-                .addComponent(btnConsultarPlanillas, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlPlanillasLayout.setVerticalGroup(
             pnlPlanillasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPlanillasLayout.createSequentialGroup()
                 .addComponent(lblPlanillas, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnConsultarPlanillas)
-                .addGap(0, 22, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pnlPrincipal.add(pnlPlanillas, "card3");
@@ -943,7 +1000,29 @@ public class vistaPlanta extends javax.swing.JFrame {
     }//GEN-LAST:event_txfBajasDesdeActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        // TODO add your handling code here:
+        String strResult = "";
+        if (!"Id".equals(txfIdFiltro.getText())){
+            if (esNumero(txfIdFiltro.getText()))
+                strResult = GuayaboAccess.getEmpleadoId(Integer.parseInt(txfIdFiltro.getText()));
+            else
+                txaPrincipal.setText("Debe ingresar un id válido.");
+        }
+        else if (comboDepartamento.getSelectedIndex() != -1){
+            strResult = GuayaboAccess.getEmpleadosDepartamento(comboDepartamento.getSelectedIndex()+1);
+        }
+        else if (comboSupervisor.getSelectedIndex() != -1){
+            strResult = GuayaboAccess.getEmpleadosSupervisor(Integer.parseInt(comboSupervisor.getSelectedItem().toString()));
+        }
+        else if (!"Desde (yyyy-mm-dd)".equals(txfBajasDesde.getText()) && !"Hasta (yyyy-mm-dd)".equals(txfBajasHasta.getText())){
+            if (fechaValida(txfBajasDesde.getText()) && fechaValida(txfBajasHasta.getText())){
+                try { strResult = GuayaboAccess.getEmpleadosDadosDeBaja(formatoFecha.parse(txfBajasDesde.getText()), formatoFecha.parse(txfBajasHasta.getText()));
+                } catch (ParseException ex) {}
+            }
+            else 
+                txaPrincipal.setText("Debe ingresar fechas validas.");
+        }
+        txaPrincipal.setText(strResult);
+        cleanFiltrosEmpleados();
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void txfAusenciasDesdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfAusenciasDesdeActionPerformed
@@ -951,7 +1030,18 @@ public class vistaPlanta extends javax.swing.JFrame {
     }//GEN-LAST:event_txfAusenciasDesdeActionPerformed
 
     private void btnConsultarAusenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarAusenciasActionPerformed
-        // TODO add your handling code here:
+        if (!"Desde (yyyy-mm-dd)".equals(txfAusenciasDesde.getText()) && !"Hasta (yyyy-mm-dd)".equals(txfAusenciasHasta.getText())){
+            if (fechaValida(txfAusenciasDesde.getText()) && fechaValida(txfAusenciasHasta.getText())){
+                String strResult = "";
+                try {strResult = GuayaboAccess.getAusencias(formatoFecha.parse(txfAusenciasDesde.getText()), formatoFecha.parse(txfAusenciasHasta.getText()));
+                } catch (ParseException ex) {strResult = ex.toString();}
+                txaAsistencia.setText(strResult);
+                cleanAusencias();
+            }
+            else 
+                txaAsistencia.setText("Debe ingresar fechas validas.");
+        }
+        else txaAsistencia.setText("Ingrese el periodo de tiempo que quiere consultar.");
     }//GEN-LAST:event_btnConsultarAusenciasActionPerformed
 
     private void txfTardiasDesdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfTardiasDesdeActionPerformed
@@ -963,17 +1053,158 @@ public class vistaPlanta extends javax.swing.JFrame {
     }//GEN-LAST:event_txfEmpleadosSinMarcaDesdeActionPerformed
 
     private void btnConsultarTardiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarTardiasActionPerformed
-        // TODO add your handling code here:
+        if (!"Desde (yyyy-mm-dd)".equals(txfTardiasDesde.getText()) && !"Hasta (yyyy-mm-dd)".equals(txfTardiasHasta.getText())){
+            if (fechaValida(txfTardiasDesde.getText()) && fechaValida(txfTardiasHasta.getText())){
+                String strResult = "";
+                try {strResult = GuayaboAccess.getTardias(formatoFecha.parse(txfTardiasDesde.getText()), formatoFecha.parse(txfTardiasHasta.getText()));
+                } catch (ParseException ex) {strResult = ex.toString();}
+                txaAsistencia.setText(strResult);
+                cleanTardias();
+            }
+            else 
+                txaAsistencia.setText("Debe ingresar fechas validas.");
+        }
+        else txaAsistencia.setText("Ingrese el periodo de tiempo que quiere consultar.");
     }//GEN-LAST:event_btnConsultarTardiasActionPerformed
 
     private void btnConsultarEmpleadosSinMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarEmpleadosSinMarcaActionPerformed
-        // TODO add your handling code here:
+        if (!"Desde (yyyy-mm-dd)".equals(txfEmpleadosSinMarcaDesde.getText()) && !"Hasta (yyyy-mm-dd)".equals(txfEmpleadosSinMarcaHasta.getText())){
+            if (fechaValida(txfEmpleadosSinMarcaDesde.getText()) && fechaValida(txfEmpleadosSinMarcaHasta.getText())){
+                String strResult = "";
+                try {strResult = GuayaboAccess.getSinMarcaSalida(formatoFecha.parse(txfEmpleadosSinMarcaDesde.getText()), formatoFecha.parse(txfEmpleadosSinMarcaHasta.getText()));
+                } catch (ParseException ex) {strResult = ex.toString();}
+                txaAsistencia.setText(strResult);
+                cleanSinMarcaSalida();
+            }
+            else 
+                txaAsistencia.setText("Debe ingresar fechas validas.");
+        }
+        else txaAsistencia.setText("Ingrese el periodo de tiempo que quiere consultar.");
     }//GEN-LAST:event_btnConsultarEmpleadosSinMarcaActionPerformed
 
     private void tBtnPlanillasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tBtnPlanillasActionPerformed
         if (tBtnPlanillas.isSelected())
             opcionPlanillas();
     }//GEN-LAST:event_tBtnPlanillasActionPerformed
+
+    private void btnConsultarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarEmpleadosActionPerformed
+        String strResult = GuayaboAccess.getEmpleados();
+        txaPrincipal.setText(strResult);
+    }//GEN-LAST:event_btnConsultarEmpleadosActionPerformed
+
+    private void btnInsertarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarEmpleadoActionPerformed
+        if(!checkModoPrueba.isSelected()){
+            if (!"Nombre".equals(txfNombre.getText()) && !"Apellidos".equals(txfApellidos.getText()) && !"Fecha de entrada (yyyy-mm-dd)".equals(txfFechaEntrada.getText()) &&
+                !"Departamento".equals(txfDepartamento.getText()) && !"Supervisor".equals(txfSupervisor.getText()) && !"Calendario".equals(txfCalendario.getText()) && 
+                !"Fecha de salida (yyyy-mm-dd)".equals(txfFechaSalida.getText())){
+                if (esNumero(txfDepartamento.getText()) && esNumero(txfCalendario.getText())){
+                    if(fechaValida(txfFechaEntrada.getText())){
+                        String strResult = ""; boolean ok = false;
+                        if (!"null".equals(txfFechaSalida.getText())){   
+                            if (!fechaValida(txfFechaSalida.getText())) txaPrincipal.setText("Debe ingresar una fecha de salida válida.");
+                            else ok = true;
+                        } else ok = true;
+
+                        if(ok) {
+                            try {strResult = GuayaboAccess.insertEmpleado(txfNombre.getText(), txfApellidos.getText(), formatoFecha.parse(txfFechaEntrada.getText()),
+                                Integer.parseInt(txfDepartamento.getText()), txfSupervisor.getText(), Integer.parseInt(txfCalendario.getText()), txfFechaSalida.getText());
+                            } catch (ParseException ex) {Logger.getLogger(vistaPlantaGuayabo.class.getName()).log(Level.SEVERE, null, ex);}
+                        }
+                        cleanModificacionEmpleados ();
+                        txaPrincipal.setText(strResult);
+                    }
+                    else txaPrincipal.setText("Debe ingresar una fecha de entrada válida.");
+                }
+                else txaPrincipal.setText("Departamento y calendario deben ser números.");
+            }
+            else txaPrincipal.setText("No pueden haber espacios en blanco."); 
+        }
+        else txaPrincipal.setText("No puede hacerle cambios a la base de datos estando en modo prueba.");
+    }//GEN-LAST:event_btnInsertarEmpleadoActionPerformed
+
+    private void btnModificarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarEmpleadoActionPerformed
+        if(!checkModoPrueba.isSelected()){
+            if (!"Id".equals(txfId.getText()) && !"Nombre".equals(txfNombre.getText()) && !"Apellidos".equals(txfApellidos.getText()) && !"Fecha de entrada (yyyy-mm-dd)".equals(txfFechaEntrada.getText()) &&
+                !"Departamento".equals(txfDepartamento.getText()) && !"Supervisor".equals(txfSupervisor.getText()) && !"Calendario".equals(txfCalendario.getText()) && 
+                !"Fecha de salida (yyyy-mm-dd)".equals(txfFechaSalida.getText())){
+                if (esNumero(txfId.getText()) && esNumero(txfDepartamento.getText()) && esNumero(txfCalendario.getText())){
+                    if(fechaValida(txfFechaEntrada.getText())){
+                        String strResult = ""; boolean ok = false;
+                        if (!"null".equals(txfFechaSalida.getText())){   
+                            if (!fechaValida(txfFechaSalida.getText())) txaPrincipal.setText("Debe ingresar una fecha de salida válida.");
+                            else ok = true;
+                        } else ok = true;
+
+                        if(ok) {
+                            try {strResult = GuayaboAccess.actualizarEmpleado(Integer.parseInt(txfId.getText()),txfNombre.getText(), txfApellidos.getText(), formatoFecha.parse(txfFechaEntrada.getText()),
+                                Integer.parseInt(txfDepartamento.getText()), txfSupervisor.getText(), Integer.parseInt(txfCalendario.getText()), txfFechaSalida.getText());
+                            } catch (ParseException ex) {Logger.getLogger(vistaPlantaGuayabo.class.getName()).log(Level.SEVERE, null, ex);}
+                        }
+                        cleanModificacionEmpleados ();
+                        txaPrincipal.setText(strResult);
+                    }
+                    else txaPrincipal.setText("Debe ingresar una fecha de entrada válida.");
+                }
+                else txaPrincipal.setText("El id, departamento y calendario deben ser números.");
+            }
+            else txaPrincipal.setText("No pueden haber espacios en blanco.");   
+        }
+        else txaPrincipal.setText("No puede hacerle cambios a la base de datos estando en modo prueba.");
+    }//GEN-LAST:event_btnModificarEmpleadoActionPerformed
+
+    private void btnEliminarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEmpleadoActionPerformed
+        if(!checkModoPrueba.isSelected()){        
+            if (!"Id".equals(txfIdEliminar.getText()) && !"Fecha de salida (yyyy-mm-dd)".equals(txfFechaBaja.getText())){
+                if (esNumero(txfIdEliminar.getText())){
+                    if(fechaValida(txfFechaBaja.getText())){
+                        String strResult = ""; 
+                        int opcion = JOptionPane.showConfirmDialog(null, "¿Desea continuar con la eliminación?", "Confirmación", JOptionPane.YES_NO_OPTION);    //se da un mensaje para confirmacion
+                        if (opcion == JOptionPane.YES_OPTION) {
+                            try {strResult = GuayaboAccess.eliminarEmpleado(Integer.parseInt(txfIdEliminar.getText()), formatoFecha.parse(txfFechaBaja.getText()));
+                            }catch (ParseException ex) {Logger.getLogger(vistaPlantaGuayabo.class.getName()).log(Level.SEVERE, null, ex);}
+                            txaPrincipal.setText(strResult);        
+                        } else { txaPrincipal.setText("No se continuó con la eliminación del empleado.");}   
+                        cleanDarDeBaja();
+                    } else txaPrincipal.setText("Debe ingresar una fecha de salida válida.");
+                } else txaPrincipal.setText("Debe ingresar un id válido.");
+            }
+            else txaPrincipal.setText("No pueden haber espacios en blanco.");   
+        }
+        else txaPrincipal.setText("No puede hacerle cambios a la base de datos estando en modo prueba.");
+    }//GEN-LAST:event_btnEliminarEmpleadoActionPerformed
+
+    private void btnConsultarAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarAsistenciaActionPerformed
+        String strResult = GuayaboAccess.getMarcasEmpleados();
+        txaAsistencia.setText(strResult);
+    }//GEN-LAST:event_btnConsultarAsistenciaActionPerformed
+
+    private void checkModoPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkModoPruebaActionPerformed
+        if (checkModoPrueba.isSelected()) modoPrueba = true;
+        else modoPrueba = false;
+    }//GEN-LAST:event_checkModoPruebaActionPerformed
+
+    private void btnEnviarPlanillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarPlanillaActionPerformed
+        if(!checkModoPrueba.isSelected()){  
+            if (tbtnAprobarPlanilla.isSelected()){
+                GuayaboAccess.actualizarDatosPlanilla();
+                GuayaboAccess.createCSV();           // se manda la que se acaba de crear o toda la tabla planillas que se tiene?
+            }
+            else if (tbtnRechazarPlanilla.isSelected()){
+                txaSalarios.setText("");
+            }
+            else 
+                txaSalarios.setText("Debe aprobar o rechazar la planilla antes de enviarla.");
+        }    
+        else txaSalarios.setText("No puede hacerle cambios a la base de datos estando en modo prueba.");    
+  
+    }//GEN-LAST:event_btnEnviarPlanillaActionPerformed
+
+    private void btnCalcularPlanillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularPlanillaActionPerformed
+        if (comboTipoPago.getSelectedIndex() != -1 && comboMeses.getSelectedIndex() != -1 && comboSemanas.getSelectedIndex() != -1){
+            txaSalarios.setText(GuayaboAccess.calcularPlanilla((comboTipoPago.getSelectedIndex()+1), (comboMeses.getSelectedIndex()+1), (comboSemanas.getSelectedIndex()+1)));
+        }
+        else txaSalarios.setText("Debe seleccionar un tipo de pago, un mes y una semana.");  
+    }//GEN-LAST:event_btnCalcularPlanillaActionPerformed
     
     // ********************************* INIT *********************************
     private void agrupaciones (){
@@ -985,6 +1216,11 @@ public class vistaPlanta extends javax.swing.JFrame {
         grupoBotones.add(tBtnCalculoPlanilla);
         grupoBotones.add(tBtnPlanillas);
         grupoBotones.add(tBtnConfiguracion);
+        
+        ButtonGroup botonesPlanilla = new ButtonGroup ();
+        botonesPlanilla.add(tbtnAprobarPlanilla);
+        botonesPlanilla.add(tbtnRechazarPlanilla);
+        
         focusListener();
         opcionNull();
         
@@ -997,18 +1233,47 @@ public class vistaPlanta extends javax.swing.JFrame {
             }
         }
     }
-  
+    
     // ******************************* OPCIONES *******************************
     // EMPLEADOS
     private void opcionEmpleados (){    
         opcionNull();
         pnlEmpleados.setVisible(true);
     }
+    // CLEARS
+    private void cleanFiltrosEmpleados (){
+        txfIdFiltro.setText("Id");      txfIdFiltro.setForeground(Color.GRAY);
+        comboDepartamento.setSelectedIndex(-1);
+        comboSupervisor.setSelectedIndex(-1);
+        txfBajasDesde.setText("");
+        txfBajasHasta.setText("");
+    }
+    private void cleanModificacionEmpleados (){
+        txfId.setText("Id");      txfId.setForeground(Color.GRAY);
+        txfNombre.setText("Nombre");      txfNombre.setForeground(Color.GRAY);
+        txfApellidos.setText("Apellidos");      txfApellidos.setForeground(Color.GRAY);
+        txfFechaEntrada.setText("Fecha de entrada (yyyy-mm-dd)");      txfFechaEntrada.setForeground(Color.GRAY);
+        txfFechaSalida.setText("Fecha de salida (yyyy-mm-dd)");        txfFechaSalida.setForeground(Color.GRAY);
+        txfDepartamento.setText("Departamento");      txfDepartamento.setForeground(Color.GRAY);
+        txfSupervisor.setText("Supervisor");      txfSupervisor.setForeground(Color.GRAY);
+        txfCalendario.setText("Calendario");      txfCalendario.setForeground(Color.GRAY);
+    }
+    private void cleanDarDeBaja(){
+        txfIdEliminar.setText("Id");      txfIdEliminar.setForeground(Color.GRAY);
+        txfFechaBaja.setText("Fecha de salida (yyyy-mm-dd)");        txfFechaBaja.setForeground(Color.GRAY);
+    }
 
     // CALENDARIO LABORAL
     private void opcionCalendario (){
+        String strResult = ""; 
         opcionNull();
         pnlCalendario.setVisible(true);
+        strResult = GuayaboAccess.getCalendarios();
+        txaCalendario.setText(strResult);
+        strResult = GuayaboAccess.getJornadas();
+        txaJornada.setText(strResult);
+        strResult = GuayaboAccess.getFeriados();
+        txaFeriados.setText(strResult);
     }
     
     // ASISTENCIA
@@ -1016,6 +1281,19 @@ public class vistaPlanta extends javax.swing.JFrame {
         opcionNull();
         pnlAsistencia.setVisible(true);
     }    
+    // CLEARS
+    private void cleanAusencias(){
+        txfAusenciasDesde.setText("Desde (yyyy-mm-dd)");      txfAusenciasDesde.setForeground(Color.GRAY);
+        txfAusenciasHasta.setText("Hasta (yyyy-mm-dd)");      txfAusenciasHasta.setForeground(Color.GRAY);
+    }
+    private void cleanTardias(){
+        txfTardiasDesde.setText("Desde (yyyy-mm-dd)");      txfTardiasDesde.setForeground(Color.GRAY);
+        txfTardiasHasta.setText("Hasta (yyyy-mm-dd)");      txfTardiasHasta.setForeground(Color.GRAY);
+    }
+    private void cleanSinMarcaSalida(){
+        txfEmpleadosSinMarcaDesde.setText("Desde (yyyy-mm-dd)");      txfEmpleadosSinMarcaDesde.setForeground(Color.GRAY);
+        txfEmpleadosSinMarcaHasta.setText("Hasta (yyyy-mm-dd)");      txfEmpleadosSinMarcaHasta.setForeground(Color.GRAY);
+    }
     
     // CALCULO DE PLANILLA
     private void opcionCalculoDePlanilla (){
@@ -1027,8 +1305,34 @@ public class vistaPlanta extends javax.swing.JFrame {
     private void opcionPlanillas (){
         opcionNull();
         pnlPlanillas.setVisible(true);
+        String strResult = GuayaboAccess.getPlanillas();
+        txaPlanillasPlanta.setText(strResult);
     }
     
+    
+    // validaciones
+    public boolean esNumero(String str) {
+        try {
+            // Intenta convertir el String a un número
+            Integer.parseInt(str);
+            return true; // Si no se lanza NumberFormatException, es un número válido
+        } catch (NumberFormatException e) {
+            return false; // No es un número válido
+        }
+    }
+    private boolean fechaValida(String fecha) {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        formatoFecha.setLenient(false); // Establece el modo estricto
+        try {
+            // Intenta analizar la fecha
+            Date date = formatoFecha.parse(fecha);
+            // Si no se lanza una excepción, la fecha es válida
+            return true;
+        } catch (Exception e) {
+            // La fecha no es válida
+            return false;
+        }
+    }
     
     // place holders
     private void focusListener (){
@@ -1323,13 +1627,13 @@ public class vistaPlanta extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(vistaPlanta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaPlantaGuayabo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(vistaPlanta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaPlantaGuayabo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(vistaPlanta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaPlantaGuayabo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(vistaPlanta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaPlantaGuayabo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -1339,7 +1643,7 @@ public class vistaPlanta extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new vistaPlanta().setVisible(true);
+                new vistaPlantaGuayabo().setVisible(true);
             }
         });
     }
@@ -1351,16 +1655,17 @@ public class vistaPlanta extends javax.swing.JFrame {
     private javax.swing.JButton btnConsultarAusencias;
     private javax.swing.JButton btnConsultarEmpleados;
     private javax.swing.JButton btnConsultarEmpleadosSinMarca;
-    private javax.swing.JButton btnConsultarPlanillas;
     private javax.swing.JButton btnConsultarTardias;
     private javax.swing.JButton btnEliminarEmpleado;
     private javax.swing.JButton btnEnviarPlanilla;
     private javax.swing.JButton btnInsertarEmpleado;
     private javax.swing.JButton btnModificarEmpleado;
     private javax.swing.JCheckBox checkModoPrueba;
-    private javax.swing.JComboBox<String> comboCalendarios;
     private javax.swing.JComboBox<String> comboDepartamento;
+    private javax.swing.JComboBox<String> comboMeses;
+    private javax.swing.JComboBox<String> comboSemanas;
     private javax.swing.JComboBox<String> comboSupervisor;
+    private javax.swing.JComboBox<String> comboTipoPago;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

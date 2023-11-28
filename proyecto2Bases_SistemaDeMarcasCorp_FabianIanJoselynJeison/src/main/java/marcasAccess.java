@@ -93,9 +93,6 @@ public class marcasAccess {
             restaMes=mesF-mesI;
             restaDia=diaF-diaI;
             if (empleadoExists) {
-                
-            }
-            if (empleadoExists) {
                 if (restaAnno!=0)
                     cantDias=cantDias+365;
                 if (restaMes!=0)

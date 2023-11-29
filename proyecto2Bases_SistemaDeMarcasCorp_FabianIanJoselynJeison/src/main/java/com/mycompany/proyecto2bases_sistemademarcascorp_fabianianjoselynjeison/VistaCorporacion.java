@@ -292,6 +292,7 @@ public class VistaCorporacion extends javax.swing.JFrame {
         btnAguinaldo = new javax.swing.JToggleButton();
         btnPlantas = new javax.swing.JToggleButton();
         btnPlantas1 = new javax.swing.JToggleButton();
+        btnEstad = new javax.swing.JToggleButton();
         pnlScrollPane = new javax.swing.JScrollPane();
         tblVista = new javax.swing.JTable();
         lblTitulo = new javax.swing.JLabel();
@@ -392,6 +393,16 @@ public class VistaCorporacion extends javax.swing.JFrame {
             }
         });
 
+        btnEstad.setBackground(new java.awt.Color(0, 51, 102));
+        btnEstad.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
+        btnEstad.setForeground(new java.awt.Color(255, 255, 255));
+        btnEstad.setText("Estadísticas");
+        btnEstad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEstadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlMenuLayout = new javax.swing.GroupLayout(pnlMenu);
         pnlMenu.setLayout(pnlMenuLayout);
         pnlMenuLayout.setHorizontalGroup(
@@ -404,7 +415,8 @@ public class VistaCorporacion extends javax.swing.JFrame {
                     .addComponent(btnAguinaldo, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                     .addComponent(btnPlantas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCargarPlanilla, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPlantas1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnPlantas1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEstad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlMenuLayout.setVerticalGroup(
@@ -422,7 +434,9 @@ public class VistaCorporacion extends javax.swing.JFrame {
                 .addComponent(btnPlantas, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnPlantas1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                .addGap(118, 118, 118))
+                .addGap(18, 18, 18)
+                .addComponent(btnEstad, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addGap(65, 65, 65))
         );
 
         tblVista.setModel(new javax.swing.table.DefaultTableModel(
@@ -582,7 +596,9 @@ public class VistaCorporacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCargarPlanillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarPlanillaActionPerformed
-        // TODO add your handling code here:
+        close();
+        CargarPlanilla cp = new CargarPlanilla();
+        cp.setVisible(true);
     }//GEN-LAST:event_btnCargarPlanillaActionPerformed
 
     private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
@@ -638,6 +654,10 @@ public class VistaCorporacion extends javax.swing.JFrame {
         gp.setVisible(true);
     }//GEN-LAST:event_btnPlantas1ActionPerformed
 
+    private void btnEstadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEstadActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -679,6 +699,7 @@ public class VistaCorporacion extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnCargarPlanilla;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JToggleButton btnEmpleados;
+    private javax.swing.JToggleButton btnEstad;
     private javax.swing.JToggleButton btnHistoricoP;
     private javax.swing.JButton btnModificar;
     private javax.swing.JToggleButton btnPlantas;

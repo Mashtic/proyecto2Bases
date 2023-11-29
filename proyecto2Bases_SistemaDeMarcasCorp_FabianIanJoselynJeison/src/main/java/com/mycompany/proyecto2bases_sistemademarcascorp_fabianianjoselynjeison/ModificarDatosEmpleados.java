@@ -8,7 +8,9 @@ import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 
 /**
@@ -130,9 +132,12 @@ private void opcionEliminarEmpleado(String Id){
         tfDepartamento = new javax.swing.JTextField();
         tfCalendario = new javax.swing.JTextField();
         tfSupervisor = new javax.swing.JTextField();
-        btnRegresar = new javax.swing.JButton();
         btnInsertar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
+        btnCargar = new javax.swing.JButton();
+        tfRuta = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -256,16 +261,6 @@ private void opcionEliminarEmpleado(String Id){
         tfSupervisor.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tfSupervisor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        btnRegresar.setBackground(new java.awt.Color(0, 51, 102));
-        btnRegresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegresar.setText("Regresar");
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
-            }
-        });
-
         btnInsertar.setBackground(new java.awt.Color(0, 51, 102));
         btnInsertar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnInsertar.setForeground(new java.awt.Color(255, 255, 255));
@@ -283,6 +278,16 @@ private void opcionEliminarEmpleado(String Id){
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
+            }
+        });
+
+        btnRegresar.setBackground(new java.awt.Color(0, 51, 102));
+        btnRegresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
             }
         });
 
@@ -372,27 +377,77 @@ private void opcionEliminarEmpleado(String Id){
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(tfActivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegresar)
-                    .addComponent(btnEliminar))
+                    .addComponent(btnEliminar)
+                    .addComponent(btnRegresar))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
+
+        btnCargar.setBackground(new java.awt.Color(0, 51, 102));
+        btnCargar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCargar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCargar.setText("Cargar csv");
+        btnCargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCargarActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel11.setText("Especifique la ruta");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCargar)
+                    .addComponent(tfRuta)
+                    .addComponent(jLabel11))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
+private void opcionCargar(String rutaArchivo) {
+    System.out.println("Ruta del archivo: " + rutaArchivo);
+    try {
+        System.out.println("entramos al try");
+        Connection connection = SQLconnection.getConnection();
+        String sql = "EXEC CargarDatosEmpleados ?";
+        System.out.println("CARGADOS");
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, rutaArchivo);
+            int rowsAffected = stmt.executeUpdate(); // Cambiado a executeUpdate()
+            System.out.println("Filas afectadas: " + rowsAffected);
+        }
+
+        connection.close();
+    } catch (SQLException ex) {
+        System.err.println("Error SQL: " + ex.getMessage());
+        System.err.println("Código de estado SQL: " + ex.getSQLState());
+        ex.toString();
+    }
+}
+      
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         String Id = tfID.getText();
         String nombreEmpleado = tfName.getText();
@@ -414,11 +469,10 @@ private void opcionEliminarEmpleado(String Id){
             Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
 }
     
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        close();
-        VistaCorporacion vc = new VistaCorporacion();
-        vc.setVisible(true);
-    }//GEN-LAST:event_btnRegresarActionPerformed
+    private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
+        String rutaArchivo = tfRuta.getText();
+        opcionCargar(rutaArchivo);
+    }//GEN-LAST:event_btnCargarActionPerformed
 
     private void tfIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIDActionPerformed
         // TODO add your handling code here:
@@ -460,6 +514,12 @@ private void opcionEliminarEmpleado(String Id){
         // TODO add your handling code here:
     }//GEN-LAST:event_tfApellidoActionPerformed
 
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        close();
+        VistaCorporacion vc = new VistaCorporacion();
+        vc.setVisible(true);
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -497,11 +557,13 @@ private void opcionEliminarEmpleado(String Id){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnCargar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnInsertar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -522,6 +584,7 @@ private void opcionEliminarEmpleado(String Id){
     private javax.swing.JTextField tfID;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfPlanta;
+    private javax.swing.JTextField tfRuta;
     private javax.swing.JTextField tfSupervisor;
     // End of variables declaration//GEN-END:variables
 }

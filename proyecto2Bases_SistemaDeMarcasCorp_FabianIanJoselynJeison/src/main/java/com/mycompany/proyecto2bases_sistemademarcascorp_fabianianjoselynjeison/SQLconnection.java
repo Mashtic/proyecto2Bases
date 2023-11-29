@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class SQLconnection {
     
     public static Connection getConnection(){
-        String connectionUrl = "jdbc:sqlserver://server-proyecto-bd.database.windows.net:1433;databaseName=Prueba;user=adminPry;password=password01%;encrypt=true;trustServerCertificate=true";
+        String connectionUrl = "jdbc:sqlserver://DESKTOP-VRBEGCS:1433;databaseName=DBCORP;user=DANIEL_LOG;password=12345678;encrypt=true;trustServerCertificate=true";
         System.out.println("Conexión establecida");
         
         try {

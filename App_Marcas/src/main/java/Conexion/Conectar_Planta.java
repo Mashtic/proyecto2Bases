@@ -21,19 +21,16 @@ public class Conectar_Planta {
     private static String host = "localhost";
     private static String puerto = "3306";
     
-    private static String baseDatos = "plantaCentral";
-    
-    private static String url = "jdbc:mysql://" + host + ":" + puerto + "/" + baseDatos + "?useSSL=false";
-    
     private static String usuario = "root";
     private static String contrasenna = "1234";
     
     // Métodos
-    public static Connection conectar() {
+    public static Connection conectar(String baseDatos) {
         Connection conexion = null;
 
         try {
             // Hace conexión a la base
+            String url = "jdbc:mysql://" + host + ":" + puerto + "/" + baseDatos + "?useSSL=false";
             Class.forName(driver);
             conexion = DriverManager.getConnection(url, usuario, contrasenna);
             

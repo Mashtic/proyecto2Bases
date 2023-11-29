@@ -18,4 +18,11 @@
         <maven.compiler.target>19</maven.compiler.target>
         <exec.mainClass>com.mycompany.proyecto2bases_sistemademarcascorp_fabianianjoselynjeison.Proyecto2Bases_SistemaDeMarcasCorp_FabianIanJoselynJeison</exec.mainClass>
     </properties>
+    <dependencies>
+                <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.17</version>
+                </dependency>
+    </dependencies>
 </project>

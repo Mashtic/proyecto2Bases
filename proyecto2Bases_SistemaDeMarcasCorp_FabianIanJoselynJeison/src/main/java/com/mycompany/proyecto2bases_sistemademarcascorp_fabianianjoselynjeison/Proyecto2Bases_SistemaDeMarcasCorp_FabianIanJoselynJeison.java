@@ -13,5 +13,6 @@ public class Proyecto2Bases_SistemaDeMarcasCorp_FabianIanJoselynJeison {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
+        new VistaCorporacion().setVisible(true);
     }
 }

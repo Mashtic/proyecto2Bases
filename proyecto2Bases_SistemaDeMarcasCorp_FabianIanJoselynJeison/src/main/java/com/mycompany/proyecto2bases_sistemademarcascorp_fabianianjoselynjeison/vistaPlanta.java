@@ -152,7 +152,6 @@ public class vistaPlanta extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
-        checkModoPrueba.getAccessibleContext().setAccessibleName("Modo Prueba");
         checkModoPrueba.getAccessibleContext().setAccessibleDescription("");
 
         tblVista.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -165,6 +164,7 @@ public class vistaPlanta extends javax.swing.JFrame {
             }
         ));
         tblVista.setColumnSelectionAllowed(true);
+        tblVista.setShowGrid(false);
         jScrollPane1.setViewportView(tblVista);
         tblVista.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 

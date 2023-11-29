@@ -47,6 +47,7 @@ public class VistaCorporacion extends javax.swing.JFrame {
         grupoBotones.add(btnEmpleados);
         grupoBotones.add(btnHistoricoP);
         grupoBotones.add(btnPlantas);
+        grupoBotones.add(btnEstad);
     }    
     
       private void opcionNull (){
@@ -660,7 +661,9 @@ public class VistaCorporacion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPlantas1ActionPerformed
 
     private void btnEstadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadActionPerformed
-        // TODO add your handling code here:
+        close();
+        Estadisticas est = new Estadisticas();
+        est.setVisible(true);
     }//GEN-LAST:event_btnEstadActionPerformed
 
     /**

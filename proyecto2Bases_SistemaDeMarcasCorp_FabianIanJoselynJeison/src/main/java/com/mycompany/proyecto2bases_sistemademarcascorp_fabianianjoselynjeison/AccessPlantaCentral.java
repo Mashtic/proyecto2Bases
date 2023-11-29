@@ -5,6 +5,8 @@
 package com.mycompany.proyecto2bases_sistemademarcascorp_fabianianjoselynjeison;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -714,7 +716,7 @@ public class AccessPlantaCentral {
     }   
  
     public static void createCSVPlanilla (){       
-        try {
+        try {            
             PrintWriter pw = new PrintWriter(new File("C:\\Users\\vmrjo\\OneDrive\\Escritorio\\planillaPlantaCentral.csv"));
             StringBuilder sb = new StringBuilder();
             
@@ -750,6 +752,7 @@ public class AccessPlantaCentral {
     
     public static void createCSVEmpleados (){       
         try {
+
             PrintWriter pw = new PrintWriter(new File("C:\\Users\\vmrjo\\OneDrive\\Escritorio\\empleadosPlantaCentral.csv"));
             StringBuilder sb = new StringBuilder();
             

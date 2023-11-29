@@ -865,7 +865,7 @@ public class vistaPlantaGuayabo extends javax.swing.JFrame {
         lblMarcasUtilizadas.setText("Marcas utilizadas:");
 
         txaMarcasUtilizadas.setColumns(20);
-        txaMarcasUtilizadas.setRows(5);
+        txaMarcasUtilizadas.setRows(1000);
         jScrollPane6.setViewportView(txaMarcasUtilizadas);
 
         javax.swing.GroupLayout pnlCalculoPlanillaLayout = new javax.swing.GroupLayout(pnlCalculoPlanilla);

@@ -103,9 +103,9 @@ public class marcasAccess {
             ManejadorArchivos archivo =new ManejadorArchivos(nombreArchivo);
             if (empleadoExists) {
                 if (restaAnno!=0)
-                    cantDias=cantDias+365;
+                    cantDias=cantDias+(365*restaAnno);
                 if (restaMes!=0)
-                    cantDias=cantDias+30;
+                    cantDias=cantDias+(30*restaMes);
                 if (restaDia!=0)
                     cantDias=cantDias+restaDia;
                 for (int i = 0; i < cantDias+1; i++) {

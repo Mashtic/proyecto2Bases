@@ -17,7 +17,7 @@ public class mySQLConnectionSimul {
     
 
     // Host
-    public String hostname = "127.0.0.1";
+    public String hostname = "localhost";
 
     // Puerto
     public String port = "3306";
@@ -29,7 +29,7 @@ public class mySQLConnectionSimul {
     public String username = "root";
 
     // Clave de usuario
-    public String password = "Titobladeonyx1";
+    public String password = "eladios";
 
     public Connection conectarMySQL(int planta) {
         String database = "";
@@ -41,16 +41,16 @@ public class mySQLConnectionSimul {
                 url = "jdbc:mysql://" + hostname + ":" + port + "/" + database + "?useSSL=false";
                 break;
             case 2:
-                database = "plantacentral2";
+                database = "plantaguayabo";
                 url = "jdbc:mysql://" + hostname + ":" + port + "/" + database + "?useSSL=false";
                 break;
             case 3:
-                database = "plantacentral3";
+                database = "plantaromana";
                 url = "jdbc:mysql://" + hostname + ":" + port + "/" + database + "?useSSL=false";
                 break;
             default:
                 throw new AssertionError();
-        }
+        } 
         
         try {
             Class.forName(driver);

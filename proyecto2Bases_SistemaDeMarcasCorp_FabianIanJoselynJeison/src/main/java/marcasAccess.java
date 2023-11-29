@@ -55,6 +55,7 @@ public class marcasAccess {
             // Llamas al método que tiene la clase y te devuelve una conexión
             Connection conn = SQL.conectarMySQL(planta);
             String query = "{CALL CheckEmpleadoExists(?, ?)}";
+            System.out.println("luego del call check");
             CallableStatement stmt = conn.prepareCall(query);
 
             // Establecer el parámetro para el procedimiento almacenado
@@ -252,62 +253,11 @@ public class marcasAccess {
                 
             } 
             conn.close();
-            /*
-        // Suponiendo que tienes una variable de conexión 'conn'.
-            String query = "{CALL CheckEmpleadoExists(?, ?)}";
-            stmt = conn.prepareCall(query);
-
-            // Establecer el parámetro para el procedimiento almacenado
-            stmt.setInt(1, codEmpleado); // Suponiendo que 'codEmpleado' es un int
-
-            // Registrar el parámetro de salida
-            stmt.registerOutParameter(2, Types.BIT);
-
-            // Ejecutar el procedimiento almacenado
-            stmt.execute();
-
-            // Leer el parámetro de salida
-            boolean empleadoExists = stmt.getBoolean(2);
-
-            // Usar 'empleadoExists' según sea necesario en tu aplicación
-            System.out.println("Empleado exists: " + empleadoExists);
-*/
         } catch (SQLException se) {
         // Manejo de errores de JDBC
             se.printStackTrace();
         }
-            
-        
-        /*
-        String str = "";
-        try{
-            Connection connection = 
-            Statement statement = null;
-            statement = connection.createStatement();
-
-            // Create and execute a SELECT SQL statement.
-            String selectSql = "EXEC GET_AUTOR";
-            ResultSet resultSet = null;
-
-            resultSet = statement.executeQuery(selectSql);
-
-            // Print results from select statement
-            while (resultSet.next()) {
-                str += resultSet.getString(1) +"\t" + 
-                        resultSet.getString(2) +"\t" + 
-                        resultSet.getDate(3) +"\t" + 
-                        resultSet.getDate(4) +"\t" + 
-                        resultSet.getInt(5) + "\t" + 
-                        resultSet.getFloat(6) + "\t"+
-                        resultSet.getString(7) + "\t" + "\n";
-                //System.out.println(resultSet.getString(2) + " " + resultSet.getString(3));
-            }
-            connection.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return str;
-*/
+         
     }
     public static void crearMarcasPrueba(int codEmpleado, int annoI, int mesI, int diaI, int annoF
             , int mesF, int diaF, int porcentajeAusencia, int planta, int probTardia, int probOMarca ) throws ParseException{

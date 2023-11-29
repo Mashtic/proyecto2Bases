@@ -530,8 +530,7 @@ public class AccessPlantaRomana {
                         resultSet.getString(4) +"\t" + 
                         resultSet.getString(5) +"\t" + 
                         resultSet.getString(6) +"\t" + 
-                        resultSet.getString(7) +"\t" + 
-                        resultSet.getString(8) +"\t" + "\n";
+                        resultSet.getString(7) +"\t" + "\n";
             }
             connection.close();
         } catch (SQLException ex) {

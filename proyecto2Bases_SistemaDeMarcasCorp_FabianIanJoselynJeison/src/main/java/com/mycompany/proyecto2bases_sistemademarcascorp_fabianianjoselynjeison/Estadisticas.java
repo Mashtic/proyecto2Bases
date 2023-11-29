@@ -323,7 +323,7 @@ public class Estadisticas extends javax.swing.JFrame {
             }
         });
 
-        btnRegresar.setBackground(new java.awt.Color(0, 51, 153));
+        btnRegresar.setBackground(new java.awt.Color(0, 51, 102));
         btnRegresar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegresar.setText("Regresar");

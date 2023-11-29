@@ -13,8 +13,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,11 +22,11 @@ import javax.swing.JComboBox;
  *
  * @author vmrjo
  */
-public class GuayaboAccess {
-    
+public class AccessPlantaGuayabo {
+
     public static JComboBox<String> inicializarBoxDepartamento (JComboBox<String> box){
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             Statement statement = null;
             statement = connection.createStatement();
 
@@ -51,7 +49,7 @@ public class GuayaboAccess {
     
     public static JComboBox<String> inicializarBoxSupervisor (JComboBox<String> box){
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             Statement statement = null;
             statement = connection.createStatement();
 
@@ -74,7 +72,7 @@ public class GuayaboAccess {
     
     public static JComboBox<String> inicializarBoxTipoPagos (JComboBox<String> box){
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             Statement statement = null;
             statement = connection.createStatement();
 
@@ -98,7 +96,7 @@ public class GuayaboAccess {
     public static String getEmpleados(){
         String str = "";
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             Statement statement = null;
             statement = connection.createStatement();
 
@@ -132,7 +130,7 @@ public class GuayaboAccess {
     public static String getEmpleadoId(int id){
         String str = "";
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             String mySql = "CALL getEmpleadoPorID (?)";
             PreparedStatement statement = connection.prepareStatement(mySql);
             statement.setInt(1, id); // Establecer el valor del parámetro
@@ -165,7 +163,7 @@ public class GuayaboAccess {
     public static String getEmpleadosDepartamento(int id){
         String str = "";
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             String mySql = "CALL getEmpleadosDepartamento (?)";
             PreparedStatement statement = connection.prepareStatement(mySql);
             statement.setInt(1, id); // Establecer el valor del parámetro
@@ -196,7 +194,7 @@ public class GuayaboAccess {
     public static String getEmpleadosSupervisor(int id){
         String str = "";
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             String mySql = "CALL getEmpleadosSupervisor (?)";
             PreparedStatement statement = connection.prepareStatement(mySql);
             statement.setInt(1, id); // Establecer el valor del parámetro
@@ -227,7 +225,7 @@ public class GuayaboAccess {
     public static String getEmpleadosDadosDeBaja(Date desde, Date hasta){
         String str = "";
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             String mySql = "CALL getEmpleadosDadosDeBaja (?,?)";
             PreparedStatement statement = connection.prepareStatement(mySql);
             statement.setDate(1, new java.sql.Date(desde.getTime())); // Establecer el valor del parámetro
@@ -259,7 +257,7 @@ public class GuayaboAccess {
     public static String insertEmpleado(String nombre, String apellidos, Date fechaEntrada,
                                         int departamento, String supervisor, int calendario, String fechaSalida){
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             String mySql = "CALL insertEmpleado (?,?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(mySql);
             statement.setString(1, nombre); 
@@ -272,7 +270,7 @@ public class GuayaboAccess {
                 SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-mm-dd");
                 Date fechaSalidaDate = null;
                 try {fechaSalidaDate = formatoFecha.parse(fechaSalida);
-                } catch (ParseException ex) {Logger.getLogger(GuayaboAccess.class.getName()).log(Level.SEVERE, null, ex);}
+                } catch (ParseException ex) {Logger.getLogger(AccessPlantaGuayabo.class.getName()).log(Level.SEVERE, null, ex);}
                 statement.setDate(4, new java.sql.Date(fechaSalidaDate.getTime()));
             }
 
@@ -299,7 +297,7 @@ public class GuayaboAccess {
     public static String actualizarEmpleado(int id, String nombre, String apellidos, Date fechaEntrada,
                                         int departamento, String supervisor, int calendario, String fechaSalida){
         try{            
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             String mySql = "CALL setEmpleadoPorID (?,?,?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(mySql);
             statement.setInt(1, id);
@@ -313,7 +311,7 @@ public class GuayaboAccess {
                 SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-mm-dd");
                 Date fechaSalidaDate = null;
                 try {fechaSalidaDate = formatoFecha.parse(fechaSalida);
-                } catch (ParseException ex) {Logger.getLogger(GuayaboAccess.class.getName()).log(Level.SEVERE, null, ex);}
+                } catch (ParseException ex) {Logger.getLogger(AccessPlantaGuayabo.class.getName()).log(Level.SEVERE, null, ex);}
                 statement.setDate(5, new java.sql.Date(fechaSalidaDate.getTime()));
             }
             
@@ -339,7 +337,7 @@ public class GuayaboAccess {
     
     public static String eliminarEmpleado(int id, Date fecha){
         try{            
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             String mySql = "CALL eliminarEmpleado (?,?)";
             PreparedStatement statement = connection.prepareStatement(mySql);
             statement.setInt(1, id);
@@ -359,7 +357,7 @@ public class GuayaboAccess {
     public static String getCalendarios(){
         String str = "";
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             Statement statement = null;
             statement = connection.createStatement();
 
@@ -393,7 +391,7 @@ public class GuayaboAccess {
     public static String getJornadas(){
         String str = "";
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             Statement statement = null;
             statement = connection.createStatement();
 
@@ -422,7 +420,7 @@ public class GuayaboAccess {
     public static String getFeriados(){
         String str = "";
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             Statement statement = null;
             statement = connection.createStatement();
 
@@ -451,7 +449,7 @@ public class GuayaboAccess {
     public static String getMarcasEmpleados(){
         String str = "";
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             Statement statement = null;
             statement = connection.createStatement();
 
@@ -481,7 +479,7 @@ public class GuayaboAccess {
     public static String getPlanillas(){
         String str = "";
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             Statement statement = null;
             statement = connection.createStatement();
 
@@ -513,7 +511,7 @@ public class GuayaboAccess {
     public static String getAusencias(Date desde, Date hasta){
         String str = "";
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             String mySql = "CALL getAusencias (?,?)";
             PreparedStatement statement = connection.prepareStatement(mySql);
             statement.setDate(1, new java.sql.Date(desde.getTime())); // Establecer el valor del parámetro
@@ -544,7 +542,7 @@ public class GuayaboAccess {
     public static String getTardias(Date desde, Date hasta){
         String str = "";
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             String mySql = "CALL getTardiasDesdeHasta (?,?)";
             PreparedStatement statement = connection.prepareStatement(mySql);
             statement.setDate(1, new java.sql.Date(desde.getTime())); // Establecer el valor del parámetro
@@ -577,7 +575,7 @@ public class GuayaboAccess {
     public static String getSinMarcaSalida(Date desde, Date hasta){
         String str = "";
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             String mySql = "CALL getSinMarcaSalida (?,?)";
             PreparedStatement statement = connection.prepareStatement(mySql);
             statement.setDate(1, new java.sql.Date(desde.getTime())); // Establecer el valor del parámetro
@@ -606,10 +604,40 @@ public class GuayaboAccess {
         return str;
     }
     
+    public static String getMontoGanadoEmpleado(int id, Date desde, Date hasta){
+        String str = "";
+        try{
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
+            String mySql = "CALL getMontoGanadoEmpleado (?, ?,?)";
+            PreparedStatement statement = connection.prepareStatement(mySql);
+            statement.setInt(1, id);
+            statement.setDate(2, new java.sql.Date(desde.getTime())); // Establecer el valor del parámetro
+            statement.setDate(3, new java.sql.Date(hasta.getTime())); // Establecer el valor del parámetro
+ 
+            ResultSet resultSet = null;
+
+            resultSet = statement.executeQuery();
+            
+            
+            str+="Id Empleado\tSuma salario bruto\tSuma de obligaciones\tSuma salario neto\n";
+            
+            while (resultSet.next()) {
+                str += resultSet.getInt(1) +"\t" + 
+                        resultSet.getString(2) +"\t" + 
+                        resultSet.getString(3) +"\t" + 
+                        resultSet.getString(4) +"\t" + "\n";
+            }
+            connection.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return str;
+    }
+    
     public static String calcularPlanilla(int tipoPago, int mes, int semana){
         String str = "";
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             String mySql = "CALL calcularPagoPlanilla (?,?,?)";
             PreparedStatement statement = connection.prepareStatement(mySql);
             statement.setInt(1, tipoPago); // Establecer el valor del parámetro
@@ -638,9 +666,39 @@ public class GuayaboAccess {
         return str;
     }
     
+    public static String getMarcasUtilizadas(int tipoPago){
+        String str = "";
+        try{
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
+            String mySql = "CALL getMarcasDesdeHasta (?)";
+            PreparedStatement statement = connection.prepareStatement(mySql);
+            statement.setInt(1, tipoPago); // Establecer el valor del parámetro
+            
+            ResultSet resultSet = null;
+
+            resultSet = statement.executeQuery();
+            
+            
+            str+="Id\tId empleado\tFecha de marca\tHora de entrada\tHora de salida\n";
+
+            while (resultSet.next()) {
+                str += resultSet.getString(1) +"\t" + 
+                    resultSet.getString(2) +"\t" + 
+                    resultSet.getString(3) +"\t" + 
+                    resultSet.getString(4) +"\t" + 
+                    resultSet.getString(5) +"\t" + "\n";
+            }
+            
+            connection.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return str;
+    }
+    
     public static void actualizarDatosPlanilla (){
         try{
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             Statement statement = null;
             statement = connection.createStatement();
 
@@ -654,25 +712,19 @@ public class GuayaboAccess {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-    }
-    
-    public static void createCSV (){
-        LocalDateTime fechaHoraActual = LocalDateTime.now();
-
-        // Formatear la fecha y hora en un formato específico
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy_MM_dd_HHmmss");
-        String fechaFormateada = fechaHoraActual.format(formatter);
-        
+    }   
+ 
+    public static void createCSVPlanilla (){       
         try {
-            PrintWriter pw = new PrintWriter(new File("C:\\Users\\vmrjo\\OneDrive\\Escritorio\\planilla_"+fechaFormateada.toString()+".csv"));
+            PrintWriter pw = new PrintWriter(new File("C:\\Users\\vmrjo\\OneDrive\\Escritorio\\planillaPlantaGuayabo.csv"));
             StringBuilder sb = new StringBuilder();
             
-            Connection connection = ConexionPlantaGuayabo.getConnection();
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
             Statement statement = null;
             statement = connection.createStatement();
 
             // Create and execute a SELECT SQL statement.
-            String selectMySql = "CALL getPlanillaBoceto()";
+            String selectMySql = "CALL getPlanillas()";
             ResultSet resultSet = null;
 
             resultSet = statement.executeQuery(selectMySql);
@@ -685,7 +737,8 @@ public class GuayaboAccess {
                 sb.append(resultSet.getString(4));  sb.append(",");
                 sb.append(resultSet.getString(5));  sb.append(",");
                 sb.append(resultSet.getString(6));  sb.append(",");
-                sb.append(resultSet.getString(7));  sb.append("\r\n");
+                sb.append(resultSet.getString(7));  sb.append(",");
+                sb.append(resultSet.getString(8));  sb.append("\r\n");
             }
             connection.close();
             
@@ -696,6 +749,40 @@ public class GuayaboAccess {
         }
     }
     
-    
+    public static void createCSVEmpleados (){       
+        try {
+            PrintWriter pw = new PrintWriter(new File("C:\\Users\\vmrjo\\OneDrive\\Escritorio\\empleadosPlantaGuayabo.csv"));
+            StringBuilder sb = new StringBuilder();
+            
+            Connection connection = ConnectionPlantaGuayabo.getConnection();
+            Statement statement = null;
+            statement = connection.createStatement();
+
+            // Create and execute a SELECT SQL statement.
+            String selectMySql = "CALL getEmpleados()";
+            ResultSet resultSet = null;
+
+            resultSet = statement.executeQuery(selectMySql);
+
+            // Print results from select statement
+            while (resultSet.next()) {
+                sb.append(resultSet.getString(1));  sb.append(",");
+                sb.append(resultSet.getString(2));  sb.append(",");
+                sb.append(resultSet.getString(3));  sb.append(",");
+                sb.append(resultSet.getString(4));  sb.append(",");
+                sb.append(resultSet.getString(5));  sb.append(",");
+                sb.append(resultSet.getString(6));  sb.append(",");
+                sb.append(resultSet.getString(7));  sb.append(",");
+                sb.append(resultSet.getString(8));  sb.append(",");
+                sb.append(resultSet.getString(9));  sb.append("\r\n");
+            }
+            connection.close();
+            
+            pw.write(sb.toString());
+            pw.close();  
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
     
 }

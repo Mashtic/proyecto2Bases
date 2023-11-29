@@ -14,10 +14,10 @@ import java.util.logging.Logger;
  *
  * @author vmrjo
  */
-public class ConexionPlantaGuayabo {
-   
+public class ConnectionPlantaCentral {
+    
     private static final String connectionString =
-                "jdbc:mysql://localhost:3306/plantaguayabo"+"?user=root&password=eladios";          // cambiar bd
+                "jdbc:mysql://localhost:3306/plantacentral"+"?user=root&password=eladios";
     
     public static Connection getConnection() {
         try {
@@ -27,10 +27,9 @@ public class ConexionPlantaGuayabo {
             //JOptionPane.showMessageDialog(null, "se conecto a la base");
             return connection;
         } catch (SQLException ex) {System.out.println("cae en catch"+ ex);} catch (ClassNotFoundException ex) {
-            Logger.getLogger(ConexionPlantaGuayabo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConnectionPlantaCentral.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    
     
 }

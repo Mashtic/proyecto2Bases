@@ -25,11 +25,11 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
     
     public vistaPlantaCentral() {
         initComponents();
-        CentralAccess.inicializarBoxDepartamento(comboDepartamento);
+        AccessPlantaCentral.inicializarBoxDepartamento(comboDepartamento);
         comboDepartamento.setSelectedIndex(-1);
-        CentralAccess.inicializarBoxSupervisor(comboSupervisor);
+        AccessPlantaCentral.inicializarBoxSupervisor(comboSupervisor);
         comboSupervisor.setSelectedIndex(-1);
-        CentralAccess.inicializarBoxTipoPagos(comboTipoPago);
+        AccessPlantaCentral.inicializarBoxTipoPagos(comboTipoPago);
         comboTipoPago.setSelectedIndex(-1);
         agrupaciones();
     }
@@ -128,10 +128,19 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
         btnCalcularPlanilla = new javax.swing.JButton();
         comboMeses = new javax.swing.JComboBox<>();
         comboSemanas = new javax.swing.JComboBox<>();
+        lblMarcasUtilizadas = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        txaMarcasUtilizadas = new javax.swing.JTextArea();
         pnlPlanillas = new javax.swing.JPanel();
         lblPlanillas = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         txaPlanillasPlanta = new javax.swing.JTextArea();
+        btnConsultarPlanillas = new javax.swing.JButton();
+        lblConsultarMontoGanado = new javax.swing.JLabel();
+        txfIdMontoGanado = new javax.swing.JTextField();
+        txfMontoGanadoDesde = new javax.swing.JTextField();
+        txfMontoGanadoHasta = new javax.swing.JTextField();
+        btnConsultarMontoGanado = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -851,13 +860,17 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
         comboSemanas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
         comboSemanas.setSelectedIndex(-1);
 
+        lblMarcasUtilizadas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblMarcasUtilizadas.setText("Marcas utilizadas:");
+
+        txaMarcasUtilizadas.setColumns(20);
+        txaMarcasUtilizadas.setRows(5);
+        jScrollPane6.setViewportView(txaMarcasUtilizadas);
+
         javax.swing.GroupLayout pnlCalculoPlanillaLayout = new javax.swing.GroupLayout(pnlCalculoPlanilla);
         pnlCalculoPlanilla.setLayout(pnlCalculoPlanillaLayout);
         pnlCalculoPlanillaLayout.setHorizontalGroup(
             pnlCalculoPlanillaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCalculoPlanillaLayout.createSequentialGroup()
-                .addComponent(lblSalarios)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
             .addGroup(pnlCalculoPlanillaLayout.createSequentialGroup()
                 .addGap(244, 244, 244)
@@ -869,10 +882,6 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
                         .addComponent(tbtnRechazarPlanilla, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlCalculoPlanillaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblCalculoPlanillas, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(pnlCalculoPlanillaLayout.createSequentialGroup()
                 .addComponent(lblCalendarioSeleccionado)
                 .addGap(18, 18, 18)
                 .addComponent(comboTipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -882,6 +891,16 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
                 .addComponent(comboSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCalcularPlanilla, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlCalculoPlanillaLayout.createSequentialGroup()
+                .addGroup(pnlCalculoPlanillaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSalarios)
+                    .addComponent(lblMarcasUtilizadas))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(pnlCalculoPlanillaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblCalculoPlanillas, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(jScrollPane6)
         );
         pnlCalculoPlanillaLayout.setVerticalGroup(
             pnlCalculoPlanillaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -894,10 +913,14 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
                     .addComponent(btnCalcularPlanilla)
                     .addComponent(comboMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addComponent(lblMarcasUtilizadas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(lblSalarios)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCalculoPlanillaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tbtnAprobarPlanilla)
@@ -918,23 +941,86 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
         txaPlanillasPlanta.setRows(5);
         jScrollPane5.setViewportView(txaPlanillasPlanta);
 
+        btnConsultarPlanillas.setBackground(new java.awt.Color(0, 51, 153));
+        btnConsultarPlanillas.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btnConsultarPlanillas.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultarPlanillas.setText("Consultar Planillas");
+        btnConsultarPlanillas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarPlanillasActionPerformed(evt);
+            }
+        });
+
+        lblConsultarMontoGanado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblConsultarMontoGanado.setText("Consultar monto ganado por empleado con id:");
+
+        txfIdMontoGanado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfIdMontoGanado.setForeground(java.awt.Color.gray);
+        txfIdMontoGanado.setText("Id");
+
+        txfMontoGanadoDesde.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfMontoGanadoDesde.setForeground(java.awt.Color.gray);
+        txfMontoGanadoDesde.setText("Desde (yyyy-mm-dd)");
+        txfMontoGanadoDesde.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfMontoGanadoDesdeActionPerformed(evt);
+            }
+        });
+
+        txfMontoGanadoHasta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txfMontoGanadoHasta.setForeground(java.awt.Color.gray);
+        txfMontoGanadoHasta.setText("Hasta (yyyy-mm-dd)");
+
+        btnConsultarMontoGanado.setBackground(new java.awt.Color(0, 51, 153));
+        btnConsultarMontoGanado.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btnConsultarMontoGanado.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultarMontoGanado.setText("Consultar");
+        btnConsultarMontoGanado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarMontoGanadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlPlanillasLayout = new javax.swing.GroupLayout(pnlPlanillas);
         pnlPlanillas.setLayout(pnlPlanillasLayout);
         pnlPlanillasLayout.setHorizontalGroup(
             pnlPlanillasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPlanillasLayout.createSequentialGroup()
+            .addComponent(jScrollPane5)
+            .addGroup(pnlPlanillasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblPlanillas, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jScrollPane5)
+            .addGroup(pnlPlanillasLayout.createSequentialGroup()
+                .addComponent(lblConsultarMontoGanado, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txfIdMontoGanado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txfMontoGanadoDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txfMontoGanadoHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnConsultarMontoGanado, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlPlanillasLayout.createSequentialGroup()
+                .addGap(369, 369, 369)
+                .addComponent(btnConsultarPlanillas, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlPlanillasLayout.setVerticalGroup(
             pnlPlanillasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPlanillasLayout.createSequentialGroup()
                 .addComponent(lblPlanillas, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnConsultarPlanillas)
+                .addGap(24, 24, 24)
+                .addGroup(pnlPlanillasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblConsultarMontoGanado)
+                    .addComponent(txfIdMontoGanado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfMontoGanadoDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfMontoGanadoHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConsultarMontoGanado))
+                .addGap(23, 23, 23))
         );
 
         pnlPrincipal.add(pnlPlanillas, "card3");
@@ -1003,19 +1089,19 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
         String strResult = "";
         if (!"Id".equals(txfIdFiltro.getText())){
             if (esNumero(txfIdFiltro.getText()))
-                strResult = CentralAccess.getEmpleadoId(Integer.parseInt(txfIdFiltro.getText()));
+                strResult = AccessPlantaCentral.getEmpleadoId(Integer.parseInt(txfIdFiltro.getText()));
             else
                 txaPrincipal.setText("Debe ingresar un id válido.");
         }
         else if (comboDepartamento.getSelectedIndex() != -1){
-            strResult = CentralAccess.getEmpleadosDepartamento(comboDepartamento.getSelectedIndex()+1);
+            strResult = AccessPlantaCentral.getEmpleadosDepartamento(comboDepartamento.getSelectedIndex()+1);
         }
         else if (comboSupervisor.getSelectedIndex() != -1){
-            strResult = CentralAccess.getEmpleadosSupervisor(Integer.parseInt(comboSupervisor.getSelectedItem().toString()));
+            strResult = AccessPlantaCentral.getEmpleadosSupervisor(Integer.parseInt(comboSupervisor.getSelectedItem().toString()));
         }
         else if (!"Desde (yyyy-mm-dd)".equals(txfBajasDesde.getText()) && !"Hasta (yyyy-mm-dd)".equals(txfBajasHasta.getText())){
             if (fechaValida(txfBajasDesde.getText()) && fechaValida(txfBajasHasta.getText())){
-                try { strResult = CentralAccess.getEmpleadosDadosDeBaja(formatoFecha.parse(txfBajasDesde.getText()), formatoFecha.parse(txfBajasHasta.getText()));
+                try { strResult = AccessPlantaCentral.getEmpleadosDadosDeBaja(formatoFecha.parse(txfBajasDesde.getText()), formatoFecha.parse(txfBajasHasta.getText()));
                 } catch (ParseException ex) {}
             }
             else 
@@ -1033,7 +1119,7 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
         if (!"Desde (yyyy-mm-dd)".equals(txfAusenciasDesde.getText()) && !"Hasta (yyyy-mm-dd)".equals(txfAusenciasHasta.getText())){
             if (fechaValida(txfAusenciasDesde.getText()) && fechaValida(txfAusenciasHasta.getText())){
                 String strResult = "";
-                try {strResult = CentralAccess.getAusencias(formatoFecha.parse(txfAusenciasDesde.getText()), formatoFecha.parse(txfAusenciasHasta.getText()));
+                try {strResult = AccessPlantaCentral.getAusencias(formatoFecha.parse(txfAusenciasDesde.getText()), formatoFecha.parse(txfAusenciasHasta.getText()));
                 } catch (ParseException ex) {strResult = ex.toString();}
                 txaAsistencia.setText(strResult);
                 cleanAusencias();
@@ -1056,7 +1142,7 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
         if (!"Desde (yyyy-mm-dd)".equals(txfTardiasDesde.getText()) && !"Hasta (yyyy-mm-dd)".equals(txfTardiasHasta.getText())){
             if (fechaValida(txfTardiasDesde.getText()) && fechaValida(txfTardiasHasta.getText())){
                 String strResult = "";
-                try {strResult = CentralAccess.getTardias(formatoFecha.parse(txfTardiasDesde.getText()), formatoFecha.parse(txfTardiasHasta.getText()));
+                try {strResult = AccessPlantaCentral.getTardias(formatoFecha.parse(txfTardiasDesde.getText()), formatoFecha.parse(txfTardiasHasta.getText()));
                 } catch (ParseException ex) {strResult = ex.toString();}
                 txaAsistencia.setText(strResult);
                 cleanTardias();
@@ -1071,7 +1157,7 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
         if (!"Desde (yyyy-mm-dd)".equals(txfEmpleadosSinMarcaDesde.getText()) && !"Hasta (yyyy-mm-dd)".equals(txfEmpleadosSinMarcaHasta.getText())){
             if (fechaValida(txfEmpleadosSinMarcaDesde.getText()) && fechaValida(txfEmpleadosSinMarcaHasta.getText())){
                 String strResult = "";
-                try {strResult = CentralAccess.getSinMarcaSalida(formatoFecha.parse(txfEmpleadosSinMarcaDesde.getText()), formatoFecha.parse(txfEmpleadosSinMarcaHasta.getText()));
+                try {strResult = AccessPlantaCentral.getSinMarcaSalida(formatoFecha.parse(txfEmpleadosSinMarcaDesde.getText()), formatoFecha.parse(txfEmpleadosSinMarcaHasta.getText()));
                 } catch (ParseException ex) {strResult = ex.toString();}
                 txaAsistencia.setText(strResult);
                 cleanSinMarcaSalida();
@@ -1088,7 +1174,7 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
     }//GEN-LAST:event_tBtnPlanillasActionPerformed
 
     private void btnConsultarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarEmpleadosActionPerformed
-        String strResult = CentralAccess.getEmpleados();
+        String strResult = AccessPlantaCentral.getEmpleados();
         txaPrincipal.setText(strResult);
     }//GEN-LAST:event_btnConsultarEmpleadosActionPerformed
 
@@ -1106,8 +1192,9 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
                         } else ok = true;
 
                         if(ok) {
-                            try {strResult = CentralAccess.insertEmpleado(txfNombre.getText(), txfApellidos.getText(), formatoFecha.parse(txfFechaEntrada.getText()),
+                            try {strResult = AccessPlantaCentral.insertEmpleado(txfNombre.getText(), txfApellidos.getText(), formatoFecha.parse(txfFechaEntrada.getText()),
                                 Integer.parseInt(txfDepartamento.getText()), txfSupervisor.getText(), Integer.parseInt(txfCalendario.getText()), txfFechaSalida.getText());
+                                AccessPlantaCentral.createCSVEmpleados();
                             } catch (ParseException ex) {Logger.getLogger(vistaPlantaCentral.class.getName()).log(Level.SEVERE, null, ex);}
                         }
                         cleanModificacionEmpleados ();
@@ -1136,8 +1223,9 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
                         } else ok = true;
 
                         if(ok) {
-                            try {strResult = CentralAccess.actualizarEmpleado(Integer.parseInt(txfId.getText()),txfNombre.getText(), txfApellidos.getText(), formatoFecha.parse(txfFechaEntrada.getText()),
+                            try {strResult = AccessPlantaCentral.actualizarEmpleado(Integer.parseInt(txfId.getText()),txfNombre.getText(), txfApellidos.getText(), formatoFecha.parse(txfFechaEntrada.getText()),
                                 Integer.parseInt(txfDepartamento.getText()), txfSupervisor.getText(), Integer.parseInt(txfCalendario.getText()), txfFechaSalida.getText());
+                                AccessPlantaCentral.createCSVEmpleados();
                             } catch (ParseException ex) {Logger.getLogger(vistaPlantaCentral.class.getName()).log(Level.SEVERE, null, ex);}
                         }
                         cleanModificacionEmpleados ();
@@ -1160,7 +1248,8 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
                         String strResult = ""; 
                         int opcion = JOptionPane.showConfirmDialog(null, "¿Desea continuar con la eliminación?", "Confirmación", JOptionPane.YES_NO_OPTION);    //se da un mensaje para confirmacion
                         if (opcion == JOptionPane.YES_OPTION) {
-                            try {strResult = CentralAccess.eliminarEmpleado(Integer.parseInt(txfIdEliminar.getText()), formatoFecha.parse(txfFechaBaja.getText()));
+                            try {strResult = AccessPlantaCentral.eliminarEmpleado(Integer.parseInt(txfIdEliminar.getText()), formatoFecha.parse(txfFechaBaja.getText()));
+                                AccessPlantaCentral.createCSVEmpleados();
                             }catch (ParseException ex) {Logger.getLogger(vistaPlantaCentral.class.getName()).log(Level.SEVERE, null, ex);}
                             txaPrincipal.setText(strResult);        
                         } else { txaPrincipal.setText("No se continuó con la eliminación del empleado.");}   
@@ -1174,7 +1263,7 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarEmpleadoActionPerformed
 
     private void btnConsultarAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarAsistenciaActionPerformed
-        String strResult = CentralAccess.getMarcasEmpleados();
+        String strResult = AccessPlantaCentral.getMarcasEmpleados();
         txaAsistencia.setText(strResult);
     }//GEN-LAST:event_btnConsultarAsistenciaActionPerformed
 
@@ -1186,8 +1275,8 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
     private void btnEnviarPlanillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarPlanillaActionPerformed
         if(!checkModoPrueba.isSelected()){  
             if (tbtnAprobarPlanilla.isSelected()){
-                CentralAccess.actualizarDatosPlanilla();
-                CentralAccess.createCSV();           // se manda la que se acaba de crear o toda la tabla planillas que se tiene?
+                AccessPlantaCentral.actualizarDatosPlanilla();
+                AccessPlantaCentral.createCSVPlanilla();
             }
             else if (tbtnRechazarPlanilla.isSelected()){
                 txaSalarios.setText("");
@@ -1201,10 +1290,40 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
 
     private void btnCalcularPlanillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularPlanillaActionPerformed
         if (comboTipoPago.getSelectedIndex() != -1 && comboMeses.getSelectedIndex() != -1 && comboSemanas.getSelectedIndex() != -1){
-            txaSalarios.setText(CentralAccess.calcularPlanilla((comboTipoPago.getSelectedIndex()+1), (comboMeses.getSelectedIndex()+1), (comboSemanas.getSelectedIndex()+1)));
+            txaSalarios.setText(AccessPlantaCentral.calcularPlanilla((comboTipoPago.getSelectedIndex()+1), (comboMeses.getSelectedIndex()+1), (comboSemanas.getSelectedIndex()+1)));
+            txaMarcasUtilizadas.setText(AccessPlantaCentral.getMarcasUtilizadas(comboTipoPago.getSelectedIndex() + 1));
         }
         else txaSalarios.setText("Debe seleccionar un tipo de pago, un mes y una semana.");  
     }//GEN-LAST:event_btnCalcularPlanillaActionPerformed
+
+    private void btnConsultarPlanillasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarPlanillasActionPerformed
+        String strResult = AccessPlantaCentral.getPlanillas();
+        txaPlanillasPlanta.setText(strResult);        
+    }//GEN-LAST:event_btnConsultarPlanillasActionPerformed
+
+    private void txfMontoGanadoDesdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfMontoGanadoDesdeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfMontoGanadoDesdeActionPerformed
+
+    private void btnConsultarMontoGanadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarMontoGanadoActionPerformed
+        if (!"Id".equals(txfIdMontoGanado.getText()) && !"Desde (yyyy-mm-dd)".equals(txfMontoGanadoDesde.getText()) && !"Hasta (yyyy-mm-dd)".equals(txfMontoGanadoHasta.getText())){
+            if (esNumero(txfIdMontoGanado.getText())){
+                if(fechaValida(txfMontoGanadoDesde.getText()) && fechaValida(txfMontoGanadoHasta.getText())){
+                    
+                    String strResult = "";
+                    try {strResult = AccessPlantaCentral.getMontoGanadoEmpleado(Integer.parseInt(txfIdMontoGanado.getText()), formatoFecha.parse(txfMontoGanadoDesde.getText()), formatoFecha.parse(txfMontoGanadoHasta.getText()));
+                    } catch (ParseException ex) {strResult = ex.toString();}
+                    txaPlanillasPlanta.setText(strResult);
+                    cleanFiltroPlanilla();
+                    
+                }
+                else txaPlanillasPlanta.setText("Debe ingresar fechas válidas.");
+            }
+            else txaPlanillasPlanta.setText("El id debe ser un números.");
+        }
+        else txaPlanillasPlanta.setText("No pueden haber espacios en blanco."); 
+       
+    }//GEN-LAST:event_btnConsultarMontoGanadoActionPerformed
     
     // ********************************* INIT *********************************
     private void agrupaciones (){
@@ -1245,8 +1364,8 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
         txfIdFiltro.setText("Id");      txfIdFiltro.setForeground(Color.GRAY);
         comboDepartamento.setSelectedIndex(-1);
         comboSupervisor.setSelectedIndex(-1);
-        txfBajasDesde.setText("");
-        txfBajasHasta.setText("");
+        txfBajasDesde.setText("Desde (yyyy-mm-dd)");    txfBajasDesde.setForeground(Color.GRAY);
+        txfBajasHasta.setText("Hasta (yyyy-mm-dd)");    txfBajasHasta.setForeground(Color.GRAY);
     }
     private void cleanModificacionEmpleados (){
         txfId.setText("Id");      txfId.setForeground(Color.GRAY);
@@ -1268,11 +1387,11 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
         String strResult = ""; 
         opcionNull();
         pnlCalendario.setVisible(true);
-        strResult = CentralAccess.getCalendarios();
+        strResult = AccessPlantaCentral.getCalendarios();
         txaCalendario.setText(strResult);
-        strResult = CentralAccess.getJornadas();
+        strResult = AccessPlantaCentral.getJornadas();
         txaJornada.setText(strResult);
-        strResult = CentralAccess.getFeriados();
+        strResult = AccessPlantaCentral.getFeriados();
         txaFeriados.setText(strResult);
     }
     
@@ -1305,8 +1424,14 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
     private void opcionPlanillas (){
         opcionNull();
         pnlPlanillas.setVisible(true);
-        String strResult = CentralAccess.getPlanillas();
+        String strResult = AccessPlantaCentral.getPlanillas();
         txaPlanillasPlanta.setText(strResult);
+    }
+    // CLEARS
+    private void cleanFiltroPlanilla(){
+        txfIdMontoGanado.setText("Id");           txfIdMontoGanado.setForeground(Color.GRAY);
+        txfMontoGanadoDesde.setText("Desde (yyyy-mm-dd)");      txfMontoGanadoDesde.setForeground(Color.GRAY);
+        txfMontoGanadoHasta.setText("Hasta (yyyy-mm-dd)");      txfMontoGanadoHasta.setForeground(Color.GRAY);
     }
     
     
@@ -1608,6 +1733,51 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
                 }
             }
         });
+        
+        // opcionPlanillas *****************************************************
+        //Filtros de consulta
+        txfIdMontoGanado.addFocusListener(new FocusListener() {        // ID
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfIdMontoGanado.getText().equals("Id")) {
+                    txfIdMontoGanado.setText("");      txfIdMontoGanado.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfIdMontoGanado.getText().isEmpty()) {
+                    txfIdMontoGanado.setForeground(Color.GRAY);    txfIdMontoGanado.setText("Id");
+                }
+            }
+        }); 
+        txfMontoGanadoDesde.addFocusListener(new FocusListener() {        // BajasDesde
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfMontoGanadoDesde.getText().equals("Desde (yyyy-mm-dd)")) {
+                    txfMontoGanadoDesde.setText("");                  txfMontoGanadoDesde.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfMontoGanadoDesde.getText().isEmpty()) {
+                    txfMontoGanadoDesde.setForeground(Color.GRAY);    txfMontoGanadoDesde.setText("Desde (yyyy-mm-dd)");
+                }
+            }
+        });
+        txfMontoGanadoHasta.addFocusListener(new FocusListener() {        // BajasHasta
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txfMontoGanadoHasta.getText().equals("Hasta (yyyy-mm-dd)")) {
+                    txfMontoGanadoHasta.setText("");                  txfMontoGanadoHasta.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txfMontoGanadoHasta.getText().isEmpty()) {
+                    txfMontoGanadoHasta.setForeground(Color.GRAY);    txfMontoGanadoHasta.setText("Hasta (yyyy-mm-dd)");
+                }
+            }
+        });
     }
     
     /**
@@ -1655,6 +1825,8 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
     private javax.swing.JButton btnConsultarAusencias;
     private javax.swing.JButton btnConsultarEmpleados;
     private javax.swing.JButton btnConsultarEmpleadosSinMarca;
+    private javax.swing.JButton btnConsultarMontoGanado;
+    private javax.swing.JButton btnConsultarPlanillas;
     private javax.swing.JButton btnConsultarTardias;
     private javax.swing.JButton btnEliminarEmpleado;
     private javax.swing.JButton btnEnviarPlanilla;
@@ -1672,11 +1844,13 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JLabel lblAsistencia;
     private javax.swing.JLabel lblAusencias;
     private javax.swing.JLabel lblCalculoPlanillas;
     private javax.swing.JLabel lblCalendario;
     private javax.swing.JLabel lblCalendarioSeleccionado;
+    private javax.swing.JLabel lblConsultarMontoGanado;
     private javax.swing.JLabel lblDadosDeBaja;
     private javax.swing.JLabel lblDepartamento;
     private javax.swing.JLabel lblEmpleado;
@@ -1686,6 +1860,7 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
     private javax.swing.JLabel lblFiltros;
     private javax.swing.JLabel lblFiltrosAsistencia;
     private javax.swing.JLabel lblJornadaLaboral;
+    private javax.swing.JLabel lblMarcasUtilizadas;
     private javax.swing.JLabel lblModificacionEmpleados;
     private javax.swing.JLabel lblNombrePlanta;
     private javax.swing.JLabel lblPlanillas;
@@ -1716,6 +1891,7 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
     private javax.swing.JTextArea txaCalendario;
     private javax.swing.JTextArea txaFeriados;
     private javax.swing.JTextArea txaJornada;
+    private javax.swing.JTextArea txaMarcasUtilizadas;
     private javax.swing.JTextArea txaPlanillasPlanta;
     private javax.swing.JTextArea txaPrincipal;
     private javax.swing.JTextArea txaSalarios;
@@ -1734,6 +1910,9 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
     private javax.swing.JTextField txfId;
     private javax.swing.JTextField txfIdEliminar;
     private javax.swing.JTextField txfIdFiltro;
+    private javax.swing.JTextField txfIdMontoGanado;
+    private javax.swing.JTextField txfMontoGanadoDesde;
+    private javax.swing.JTextField txfMontoGanadoHasta;
     private javax.swing.JTextField txfNombre;
     private javax.swing.JTextField txfSupervisor;
     private javax.swing.JTextField txfTardiasDesde;

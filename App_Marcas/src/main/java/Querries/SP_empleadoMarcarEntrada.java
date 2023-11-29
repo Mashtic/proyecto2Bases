@@ -19,13 +19,13 @@ import java.text.ParseException;
 
 public class SP_empleadoMarcarEntrada {
     
-    public static int Insertar_Entrada(String idEmpleado, String fecha, String hora) throws ParseException{
+    public static int Insertar_Entrada(String idEmpleado, String fecha, String hora, String baseDatos) throws ParseException{
          CallableStatement cstmt = null;
          int tipoSolucion = -1;
                  
         try {
             String procedimiento = "CALL empleadoMarcarEntrada(?, ?, ?, ?);";
-            cstmt = Conectar_Planta.conectar().prepareCall(procedimiento);
+            cstmt = Conectar_Planta.conectar(baseDatos).prepareCall(procedimiento);
             
             cstmt.setInt(1, Integer. parseInt(idEmpleado));
             cstmt.setDate(2, java.sql.Date.valueOf(fecha));    

@@ -185,6 +185,7 @@ BEGIN
         SET solucion = 5;
         INSERT INTO marcasplanta (idEmpleado, fecha, horaEntrada) 
         VALUES (idEmpleado, fecha, hora);
+        CALL empleadoAgregarAusencias (idEmpleado, fecha);
     END IF;
 END $$
 $$

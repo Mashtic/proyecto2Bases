@@ -9,9 +9,8 @@ import java.sql.SQLException;
 public class SQLconnection {
     
     public static Connection getConnection(){
-        String connectionUrl = "jdbc:sqlserver://DESKTOP-VRBEGCS:1433;databaseName=DBCORP;user=DANIEL_LOG;password=12345678;encrypt=true;trustServerCertificate=true";
+        String connectionUrl = "jdbc:sqlserver://LAPTOP-ARD07SEQ\\SQLEXPRESS:1433;databaseName=DB_CORP;user=TEST;password=1234;encrypt=true;trustServerCertificate=true";
         System.out.println("Conexión establecida");
-        
         try {
             Connection conn = DriverManager.getConnection(connectionUrl);
             return conn;

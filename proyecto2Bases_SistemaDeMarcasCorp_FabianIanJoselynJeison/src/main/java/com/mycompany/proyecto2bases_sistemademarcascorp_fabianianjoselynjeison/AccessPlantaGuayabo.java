@@ -724,7 +724,7 @@ public class AccessPlantaGuayabo {
             statement = connection.createStatement();
 
             // Create and execute a SELECT SQL statement.
-            String selectMySql = "CALL getPlanillas()";
+            String selectMySql = "CALL getPlanillaArchivo()";
             ResultSet resultSet = null;
 
             resultSet = statement.executeQuery(selectMySql);

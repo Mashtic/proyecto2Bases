@@ -724,7 +724,7 @@ public class AccessPlantaCentral {
             statement = connection.createStatement();
 
             // Create and execute a SELECT SQL statement.
-            String selectMySql = "CALL getPlanillas()";
+            String selectMySql = "CALL getPlanillaArchivo()";
             ResultSet resultSet = null;
 
             resultSet = statement.executeQuery(selectMySql);
@@ -783,8 +783,10 @@ public class AccessPlantaCentral {
             pw.close();  
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        }
+        }  
     }
     
-    
 }
+    
+    
+

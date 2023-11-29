@@ -730,14 +730,14 @@ public class AccessPlantaCentral {
 
             // Print results from select statement
             while (resultSet.next()) {
-                sb.append(resultSet.getString(1));  sb.append(",");
-                sb.append(resultSet.getString(2));  sb.append(",");
-                sb.append(resultSet.getString(3));  sb.append(",");
-                sb.append(resultSet.getString(4));  sb.append(",");
-                sb.append(resultSet.getString(5));  sb.append(",");
-                sb.append(resultSet.getString(6));  sb.append(",");
-                sb.append(resultSet.getString(7));  sb.append(",");
-                sb.append(resultSet.getString(8));  sb.append("\r\n");
+                sb.append(normalizarString (resultSet.getString(1)));  sb.append(",");
+                sb.append(normalizarString (resultSet.getString(2)));  sb.append(",");
+                sb.append(normalizarString (resultSet.getString(3)));  sb.append(",");
+                sb.append(normalizarString (resultSet.getString(4)));  sb.append(",");
+                sb.append(normalizarString (resultSet.getString(5)));  sb.append(",");
+                sb.append(normalizarString (resultSet.getString(6)));  sb.append(",");
+                sb.append(normalizarString (resultSet.getString(7)));  sb.append(",");
+                sb.append(normalizarString (resultSet.getString(8)));  sb.append("\r\n");
             }
             connection.close();
             
@@ -765,16 +765,16 @@ public class AccessPlantaCentral {
 
             // Print results from select statement
             while (resultSet.next()) {
-                sb.append(resultSet.getString(1));  sb.append(",");
-                sb.append(resultSet.getString(2));  sb.append(",");
-                sb.append(resultSet.getString(3));  sb.append(",");
-                sb.append(resultSet.getString(4));  sb.append(",");
-                sb.append(resultSet.getString(5));  sb.append(",");
-                sb.append(resultSet.getString(6));  sb.append(",");
-                sb.append(resultSet.getString(7));  sb.append(",");
-                sb.append(resultSet.getString(8));  sb.append(",");
-                sb.append(resultSet.getString(9));  sb.append(",");
-                sb.append(resultSet.getString(10));  sb.append("\r\n");
+                sb.append(normalizarString (resultSet.getString(1)));  sb.append(",");
+                sb.append(normalizarString (resultSet.getString(2)));  sb.append(",");
+                sb.append(normalizarString (resultSet.getString(3)));  sb.append(",");
+                sb.append(normalizarString (resultSet.getString(4)));  sb.append(",");
+                sb.append(normalizarString (resultSet.getString(5)));  sb.append(",");
+                sb.append(normalizarString (resultSet.getString(6)));  sb.append(",");
+                sb.append(normalizarString (resultSet.getString(7)));  sb.append(",");
+                sb.append(normalizarString (resultSet.getString(8)));  sb.append(",");
+                sb.append(normalizarString (resultSet.getString(9)));  sb.append(",");
+                sb.append(normalizarString (resultSet.getString(10)));  sb.append("\r\n");
             }
             connection.close();
             
@@ -783,6 +783,12 @@ public class AccessPlantaCentral {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }  
+    }
+    
+    public static String normalizarString (String value){
+        if(value == null)
+            value ="";
+        return value;
     }
     
 }

@@ -759,7 +759,7 @@ public class AccessPlantaCentral {
             statement = connection.createStatement();
 
             // Create and execute a SELECT SQL statement.
-            String selectMySql = "CALL getEmpleados()";
+            String selectMySql = "CALL getEmpleadosArchivo()";
             ResultSet resultSet = null;
 
             resultSet = statement.executeQuery(selectMySql);
@@ -774,7 +774,8 @@ public class AccessPlantaCentral {
                 sb.append(resultSet.getString(6));  sb.append(",");
                 sb.append(resultSet.getString(7));  sb.append(",");
                 sb.append(resultSet.getString(8));  sb.append(",");
-                sb.append(resultSet.getString(9));  sb.append("\r\n");
+                sb.append(resultSet.getString(9));  sb.append(",");
+                sb.append(resultSet.getString(10));  sb.append("\r\n");
             }
             connection.close();
             

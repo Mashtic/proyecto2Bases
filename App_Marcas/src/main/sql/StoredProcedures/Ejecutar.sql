@@ -3,6 +3,7 @@ CREATE FUNCTION obtenerNumDiaSemana (
     fecha DATE
 )
 RETURNS INT -- 1: lunes, 2: martes, ..., 7: domingo
+DETERMINISTIC
 BEGIN
     DECLARE diaNum INT;
     
@@ -21,6 +22,7 @@ CREATE FUNCTION obtenerNumDiaSemanaIni (
     inicialD VARCHAR(1)
 )
 RETURNS INT
+DETERMINISTIC
 BEGIN
     DECLARE diaNum INT;
     
@@ -43,6 +45,7 @@ CREATE FUNCTION obtenerDiaSemanaTrabajable (
 	diasJornada VARCHAR(10),
     fechaEvaluar DATE)
 RETURNS BOOLEAN
+DETERMINISTIC
 BEGIN
 	DECLARE diaIni INT;
     DECLARE diaFin INT;

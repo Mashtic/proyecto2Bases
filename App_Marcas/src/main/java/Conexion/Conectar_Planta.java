@@ -22,7 +22,7 @@ public class Conectar_Planta {
     private static String puerto = "3306";
     
     private static String usuario = "root";
-    private static String contrasenna = "1234";
+    private static String contrasenna = "eladios";
     
     // Métodos
     public static Connection conectar(String baseDatos) {

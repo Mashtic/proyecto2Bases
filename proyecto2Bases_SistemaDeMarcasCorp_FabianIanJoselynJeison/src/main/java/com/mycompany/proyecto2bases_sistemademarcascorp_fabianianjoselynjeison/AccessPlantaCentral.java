@@ -287,6 +287,7 @@ public class AccessPlantaCentral {
             
             int filasActualizadas = statement.executeUpdate();
             connection.close();
+            // insertarCorp();
             if (filasActualizadas == 1) return "El empleado se ha ingresado exitosamente.";
             else return "No se pudo ingresar el empleado.";
 
@@ -794,7 +795,89 @@ public class AccessPlantaCentral {
         return value;
     }
     
-}
+    public static void insertarCorp () throws SQLException{
+
+            Connection connectionMySQL = ConnectionPlantaCentral.getConnection();
+            Statement statement1 = null;
+            statement1 = connectionMySQL.createStatement();
+            
+            String selectMySql = "CALL getEmpleadosArchivo()";
+            ResultSet resultSet = null;
+            resultSet = statement1.executeQuery(selectMySql);
+            
+
+            Connection connectionSQL = SQLconnection.getConnection();
+            Statement statement2 = connectionSQL.createStatement();
+  
+            while (resultSet.next()){      
+                String sqlInsert = "";  
+                if (resultSet.getString(5) == null && resultSet.getString(9) == null){
+                    sqlInsert = "INSERT INTO listaEmpleadosCorp (Id, nombreEmpleado, apellidosEmpleado, fechaEntrada, fechaSalida, activo, Planta, Departamento, Supervisor, Calendario) VALUES ("
+                            + resultSet.getInt(1) + ","
+                            + resultSet.getString(2) + ","
+                            + resultSet.getString(3) + ","
+                            + resultSet.getDate(4) + ","
+                            + resultSet.getString(5) + ","
+                            + resultSet.getInt(6) + ","
+                            + resultSet.getInt(7) + ","
+                            + resultSet.getInt(8) + ","
+                            + resultSet.getString(9) + ","
+                            + resultSet.getInt(10) + ")";
+                }
+                else if (resultSet.getString(5) == null && resultSet.getString(9) != null){
+                        sqlInsert = "INSERT INTO listaEmpleadosCorp (Id, nombreEmpleado, apellidosEmpleado, fechaEntrada, fechaSalida, activo, Planta, Departamento, Supervisor, Calendario) VALUES ("
+                                + resultSet.getInt(1) + ","
+                                + resultSet.getString(2) + ","
+                                + resultSet.getString(3) + ","
+                                + resultSet.getDate(4) + ","
+                                + resultSet.getString(5) + ","
+                                + resultSet.getInt(6) + ","
+                                + resultSet.getInt(7) + ","
+                                + resultSet.getInt(8) + ","
+                                + resultSet.getInt(9) + ","
+                                + resultSet.getInt(10) + ")";
+                }  
+                else if (resultSet.getString(5) != null && resultSet.getString(9) == null){
+                        sqlInsert = "INSERT INTO listaEmpleadosCorp (Id, nombreEmpleado, apellidosEmpleado, fechaEntrada, fechaSalida, activo, Planta, Departamento, Supervisor, Calendario) VALUES ("
+                                + resultSet.getInt(1) + ","
+                                + resultSet.getString(2) + ","
+                                + resultSet.getString(3) + ","
+                                + resultSet.getDate(4) + ","
+                                + resultSet.getDate(5) + ","
+                                + resultSet.getInt(6) + ","
+                                + resultSet.getInt(7) + ","
+                                + resultSet.getInt(8) + ","
+                                + resultSet.getString(9) + ","
+                                + resultSet.getInt(10) + ")";
+                }  
+                else if (resultSet.getString(5) != null && resultSet.getString(9) != null){
+                        sqlInsert = "INSERT INTO listaEmpleadosCorp (Id, nombreEmpleado, apellidosEmpleado, fechaEntrada, fechaSalida, activo, Planta, Departamento, Supervisor, Calendario) VALUES ("
+                                + resultSet.getInt(1) + ","
+                                + resultSet.getString(2) + ","
+                                + resultSet.getString(3) + ","
+                                + resultSet.getDate(4) + ","
+                                + resultSet.getDate(5) + ","
+                                + resultSet.getInt(6) + ","
+                                + resultSet.getInt(7) + ","
+                                + resultSet.getInt(8) + ","
+                                + resultSet.getInt(9) + ","
+                                + resultSet.getInt(10) + ")";
+                }  
+                
+                
+                statement2.executeUpdate(sqlInsert);
+            }
+                
+                
+            
+            connectionMySQL.close();
+            connectionSQL.close();
+
+        }
+    
+    }
+    
+
     
     
 

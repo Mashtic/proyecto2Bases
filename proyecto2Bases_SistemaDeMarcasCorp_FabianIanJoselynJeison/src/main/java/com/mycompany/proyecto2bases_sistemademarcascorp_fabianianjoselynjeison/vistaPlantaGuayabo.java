@@ -241,7 +241,7 @@ public class vistaPlantaGuayabo extends javax.swing.JFrame {
 
         lblNombrePlanta.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         lblNombrePlanta.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombrePlanta.setText("Nombre de Planta");
+        lblNombrePlanta.setText("Planta Guayabo");
 
         checkModoPrueba.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         checkModoPrueba.setForeground(new java.awt.Color(255, 255, 255));

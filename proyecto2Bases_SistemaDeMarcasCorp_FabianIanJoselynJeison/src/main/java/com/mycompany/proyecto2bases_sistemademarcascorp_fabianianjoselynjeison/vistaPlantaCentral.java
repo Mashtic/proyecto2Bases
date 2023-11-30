@@ -5,10 +5,12 @@
 package com.mycompany.proyecto2bases_sistemademarcascorp_fabianianjoselynjeison;
 
 import com.mycompany.proyecto2bases_sistemademarcascorp_fabianianjoselynjeison.AccessPlantaCentral;
+import static com.mycompany.proyecto2bases_sistemademarcascorp_fabianianjoselynjeison.AccessPlantaCentral.insertarCorp;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,7 +26,7 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
     private SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
     private boolean modoPrueba = false;
     
-    public vistaPlantaCentral() {
+    public vistaPlantaCentral() throws SQLException {
         initComponents();
         AccessPlantaCentral.inicializarBoxDepartamento(comboDepartamento);
         comboDepartamento.setSelectedIndex(-1);
@@ -33,6 +35,7 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
         AccessPlantaCentral.inicializarBoxTipoPagos(comboTipoPago);
         comboTipoPago.setSelectedIndex(-1);
         agrupaciones();
+        //AccessPlantaCentral.insertarCorp();
     }
 
     /**
@@ -1814,7 +1817,11 @@ public class vistaPlantaCentral extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new vistaPlantaCentral().setVisible(true);
+                try {
+                    new vistaPlantaCentral().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(vistaPlantaCentral.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
